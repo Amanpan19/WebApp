@@ -1,0 +1,16 @@
+package com.Cart_Service.cartService.Response;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class FavouriteDetailsResponse {
+
+    private List<Integer>favProducts;
+    private int noOfItems;
+}
