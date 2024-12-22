@@ -1,0 +1,44 @@
+<div class="cartBoard">
+    <div class="cards" *ngIf="cartDetailsLoaded">
+        <div class="productInCart" *ngFor="let product of cartProductDetails">
+            <div class="productCard">
+
+            
+                <mat-icon class="deleteButton" (click)="removeProduct(product)">delete</mat-icon>
+                
+
+                <div class="productImage">
+                    <img [src]="product.data.imageUrl" alt="{{ product.data.productName }}" class="img-responsive" />
+                </div>
+
+                <div class="productDetails">
+                    <h3 class="productName">{{ product.data.productName }}</h3>
+                    <p class="productPrice">Price: ₹{{ product.data.productPrice }}</p>
+                    <!-- <p class="productDescription">{{ product.data.description }}</p> -->
+                    <p class="availability" [ngClass]="product.data.quantity > 0 ? 'inStock' : 'outOfStock'">
+                        {{ product.data.quantity > 0 ? 'In Stock' : 'Out of Stock' }}
+                    </p>
+                    <div class="quantityControl">
+                        <button (click)="decreaseQuantity(product)" [disabled]="product.data.proQty === 1">-</button>
+                        <span>{{ product.data.proQty }}</span>
+                        <button (click)="increaseQuantity(product)">+</button>
+                    </div>
+                </div>
+
+            
+                <div class="productActions">
+
+                    <div class="productActions">
+                        <button class="buyButton" [disabled]="product.data.quantity === 0" (click)="buyProduct(product)">Buy Now</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="emptyCart" *ngIf="cartProductDetails.length === 0">
+        <p>Your cart is empty. Add some products!</p>
+        <img src="../../assets/empty.png" alt="empty cart" style="display: flex;justify-content: center; align-items: center;">
+    </div>
+</div>

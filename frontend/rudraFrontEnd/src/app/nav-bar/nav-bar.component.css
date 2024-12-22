@@ -1,0 +1,388 @@
+.nav {
+    width: 100%;
+    /* background-color: rgb(253, 35, 78); */
+    background-color: #362828;
+    position: relative;
+    top: -7px;
+    z-index: 8888;
+    justify-content: space-between;
+    /* border-bottom: 1px solid rgb(198, 197, 197); */
+    box-sizing: border-box;
+}
+
+.nav.sticky {
+    position: fixed;
+    transition: top 0.3s;
+    top:0;
+}
+
+@font-face {
+    font-family: gear;
+    src: url("../../assets/font/Game\ Of\ Squids.ttf");
+}
+
+/* Logo styling */
+.logoBox {
+    width: 100%;
+    max-width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.imgLogo img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.logoText {
+    padding-top: 20px;
+}
+
+.imgLogo, .logoText {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.logoText .logo a {
+    color: white;
+    font-family: lazyDog;
+    font-size: 45px;
+    text-decoration: none;
+    animation: logoCol 1s alternate infinite;
+}
+
+@keyframes logoCol {
+    100% {
+        color: aliceblue;
+    }
+}
+
+a {
+    text-decoration: none;
+    list-style: none;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    margin: 20px;
+    position: relative;
+}
+
+.list li {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.list li a {
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    /* border-right: 1px solid rgb(204, 201, 201);
+    border-left: 1px solid rgb(204, 201, 201); */
+    font-family: futur;
+}
+
+.list li a:hover {
+    font-weight: 600;
+}
+
+.cartIcon {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.cartIcon:hover {
+    color: rgb(242, 32, 95);
+}
+
+.proList {
+    position: absolute;
+    top: 30px;
+    border: 1px solid black;
+    padding: 15px;
+    background-color: white;
+    display: none;
+}
+
+.profile:hover .proList {
+    display: block;
+    z-index: 999;
+}
+
+.proList #log, #fav {
+    background-color: rgb(255, 0, 93);
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.proList #log:hover {
+    background-color: rgb(174, 0, 255);
+    transition: 0.3s ease-in-out;
+}
+
+.custom-badge .mat-badge-content {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+#log a, #fav a {
+    color: white;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.listLink {
+    width: 100%;
+    margin-bottom: -20px;
+}
+
+.typeList {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+    border-top: 1px solid rgb(198, 197, 197);
+    /* border-bottom: 1px solid rgb(198, 197, 197); */
+    background-color: white;
+}
+
+.typeList li a {
+    color: rgb(48, 47, 47);
+    font-family: futur;
+}
+
+.typeList li a:hover {
+    color: rgb(242, 32, 95);
+    border-bottom: 3px solid rgb(242, 32, 95);
+    padding-bottom: 21px;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.menu-icon i {
+    transition: transform 0.3s ease;
+}
+
+.menu-icon i.rotated {
+    transform: rotate(180deg);
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(1.2) saturate(100%) invert(100%);
+    font-weight: 700;
+}
+
+.nav-icon:hover {
+    color: white;
+}
+
+.bottom-nav {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .listLink {
+        width: 100%;
+        margin-bottom: -16px;
+    }
+
+    .typeList {
+        display: none;
+    }
+
+    .typeList.active {
+        display: flex;
+    }
+
+    .menu-icon {
+        border-top: 1px solid rgb(198, 197, 197);
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        padding-bottom: 15px;
+        width: 100%;
+        color: white;
+        /* background: linear-gradient(45deg ,rgb(33, 66, 93), rgb(14, 45, 55)); */
+
+    }
+}
+
+@media (max-width: 767px) {
+    .logoBox {
+        position: relative;
+        left: 30px;
+    }
+
+    .imgLogo {
+        display: none;
+    }
+
+    .searchBox {
+        position: absolute;
+        top: 30%;
+        right: -170px;
+        z-index: 999;
+    }
+
+    form {
+        transform: translate(-110%, -50%);
+        width: 50px;
+    }
+
+    form:hover,
+    form:focus-within,
+    form:valid {
+        width: 80%;
+        cursor: pointer;
+    }
+
+    .list li a {
+        border: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav {
+        position: relative;
+    }
+
+    .imgLogo img {
+        width: 40px;
+        height: auto;
+    }
+
+    .searchBox {
+        position: absolute;
+        top: 50%;
+        right: -45%;
+        z-index: 999;
+        width: 90%;
+        margin-top: -5px;
+    }
+
+    .logoText .logo a {
+        font-size: 45px;
+    }
+
+    .typeList {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .list {
+        padding: 0;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width:541px) {
+
+    .custom-badge .mat-badge-content {
+        background-color: rgb(255, 41, 95);
+        color: rgb(255, 255, 255);
+    }
+    
+    .list {
+        display: none;
+    }
+
+    .typeList {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    /* Show Bottom Navigation for Mobile View */
+    .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: -1px;
+        width: 100%;
+        height: 70px;
+        /* background-color: rgb(0, 61, 91); */
+        background-color: white;
+        padding: 10px 0;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+    }
+    
+    .bottom-nav a {
+        color: black;
+        text-decoration: none;
+    }
+    
+    .bottom-nav a:hover {
+        color: #133E87;
+    }
+
+    .bottom-nav a i{
+        font-size: 20px;
+    }
+
+    .nav {
+        background:#133E87;
+        /* background-color: rgb(255, 50, 74); */
+
+    }
+
+    .menu-icon {
+    
+        background:#133E87;
+        /* background-color: rgb(255, 50, 74); */
+        padding-bottom: 3px;
+
+    }
+
+    .bottom-nav a{
+        font-size: 12px;
+    }
+
+}
+
+
+@media (max-width: 510px) {
+    
+
+    /* .logoBox {
+        margin-left: 10px;
+        width: 40px;
+    } */
+
+    /* .list {
+        padding: 0;
+        justify-content: center;
+    } */
+/* 
+    .list li a {
+        font-size: 12px;
+    } */
+
+    
+}
+
+@media (max-width: 480px) {
+    /* .list li a {
+        font-size: 11px;
+    } */
+}
