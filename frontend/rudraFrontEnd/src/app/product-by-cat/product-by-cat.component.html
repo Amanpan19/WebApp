@@ -1,0 +1,104 @@
+<div class="mainContainer">
+  <!-- Filter Section -->
+  <div class="filterSection">
+    <h3>Product Filters</h3>
+    <hr>
+  
+    <!-- Availability Filter -->
+    <div class="filterGroup">
+      <span class="filterTitle">Availability</span>
+      <div class="option">
+        <input type="checkbox" id="inStock" onclick="toggleAvailability('inStock', 'outOfStock')">
+        <label for="inStock">In Stock</label>
+      </div>
+      <div class="option">
+        <input type="checkbox" id="outOfStock" onclick="toggleAvailability('outOfStock', 'inStock')">
+        <label for="outOfStock">Out of Stock</label>
+      </div>
+    </div>
+  
+    <!-- Price Range Filter -->
+
+
+    <div class="wrapper">
+        <header>
+          <h2>Price Range</h2>
+        </header>
+      <div class="price-input">
+          <div class="field">
+            <span>Min</span>
+            <input type="number" [(ngModel)]="minPrice" (input)="onMinInputChange(minPrice)" class="input-min">
+          </div>
+          <div class="separator">-</div>
+          <div class="field">
+            <span>Max</span>
+            <input type="number" [(ngModel)]="maxPrice" (input)="onMaxInputChange(maxPrice)" class="input-max">
+          </div>
+      </div>
+      <div class="slider">
+        <div class="progress" [style.left]="(minPrice / maxRange) * 100 + '%'" [style.right]="100 - (maxPrice / maxRange) * 100 + '%'"></div>
+      </div>
+      <div class="range-input">
+        <input type="range" [(ngModel)]="minPrice" (input)="onRangeMinInputChange(minPrice)" class="range-min" [min]="minRange" [max]="maxRange" [step]="100">
+        <input type="range" [(ngModel)]="maxPrice" (input)="onRangeMaxInputChange(maxPrice)" class="range-max" [min]="minRange" [max]="maxRange" [step]="100">
+      </div>
+    </div>
+  
+    <!-- Cloth Type Filter -->
+    <div class="filterGroup">
+      <span class="filterTitle">Cloth Type</span>
+      <div class="option">
+        <input type="checkbox" id="cotton">
+        <label for="cotton">Cotton</label>
+      </div>
+      <div class="option">
+        <input type="checkbox" id="linen">
+        <label for="linen">Linen</label>
+      </div>
+      <div class="option">
+        <input type="checkbox" id="wool">
+        <label for="wool">Wool</label>
+      </div>
+      <div class="option">
+        <input type="checkbox" id="silk">
+        <label for="silk">Silk</label>
+      </div>
+    </div>
+  
+    <!-- Add more filters as needed -->
+  </div>
+
+
+  <!-- Product Section -->
+  <div class="productBoard">
+    <!-- Products Loaded -->
+    <div class="cards" *ngIf="productsLoaded">
+      <div class="fashion-type">
+        <app-fashion-type></app-fashion-type>
+    </div>
+      <div class="proCard" *ngFor="let product of productsData">
+        <div class="cardDetails">
+          <div class="imgCont">
+            <img [src]="product.imageUrl" alt="" (click)="getProduct(product.productId)">
+            <div class="like"><a (click)="addInFavSection(product.productId)"><i class="fa-sharp fa-regular fa-heart"></i></a></div>
+            <div class="buy-icon"><a (click)="addToCart(product.productId)"><i class="far fa-shopping-bag"></i></a></div>
+          </div>
+          <h2>{{ limitWords(product.productName)}}</h2>
+          <h3>₹{{product.productPrice}} <span>onward</span></h3>
+          <div class="ratings">
+            <p id="rat">{{product.productRating}}<i class="fa fa-star"></i></p><span class="ratingSpan">2400 Reviews</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Loading State -->
+    <div class="cards" *ngIf="!productsLoaded">
+      <div class="loader">
+        <img src="../../assets/Pinwheel.gif" alt="" id="imgLoader">
+      </div>
+    </div>
+  </div>
+  
+  
+</div>

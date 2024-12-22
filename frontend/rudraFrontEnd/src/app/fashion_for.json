@@ -1,0 +1,22 @@
+{
+    "fashion_for": {
+      "type": [
+        {
+          "name": "mens",
+          "image": "../../assets/images/fashion-for/mens.png"
+        },
+        {
+          "name": "womens",
+          "image": "../../assets/images/fashion-for/womens.png"
+        },
+        {
+          "name": "kids",
+          "image": "../../assets/images/fashion-for/kids.png"
+        },
+        {
+          "name": "footwear",
+          "image": "../../assets/images/fashion-for/footwear.png"
+        }
+      ]
+    }
+}  
