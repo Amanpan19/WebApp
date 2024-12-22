@@ -1,0 +1,52 @@
+{
+    "categories": {
+      "mens": [
+        {
+          "name": "Formal Wear",
+          "image": "../../assets/images/mens/types/formalwear.png"
+        },
+        {
+          "name": "Ethnic",
+          "image": "../../assets/images/mens/types/Ethnic.png"
+        },
+        {
+          "name": "Casual",
+          "image": "../../assets/images/mens/types/casualwear.png"
+        },
+        {
+          "name": "Winter",
+          "image": "../../assets/images/mens/types/winter.png"
+        },
+        {
+          "name": "Sports Wear",
+          "image": "../../assets/images/mens/types/sportswear.png"
+        }
+      ],
+      "womens": [
+        {
+            "name": "Jewellary",
+            "image": "../../assets/images/women/type/jewellary.png"
+        },
+        {
+          "name": "Party",
+          "image": "../../assets/images/women/type/party.png"
+        },
+        {
+          "name": "Sleepwear",
+          "image": "../../assets/images/women/type/sleepwear.png"
+        },
+        {
+          "name": "Ethnic",
+          "image": "../../assets/images/women/type/ethnic.png"
+        },
+        {
+          "name": "Winter",
+          "image": "../../assets/images/women/type/winter.png"
+        },
+        {
+          "name": "Sports Wear",
+          "image": "../../assets/images/women/type/sportswear.png"
+        }
+      ]
+    }
+}  

@@ -1,0 +1,10 @@
+<div class="shop-by-category">
+    <div class="categories">
+      <div  *ngFor = "let item of category">
+        <div class="category">
+          <img [src]=item.image alt="{{item.name}}">
+          <p>{{item.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,186 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/* .fashion-type{
+    position: relative;
+    z-index: 999;
+} */
+
+.fashion-for{
+    position: relative;
+    z-index: 999;
+}
+
+.newsFront{
+    
+    background-color: white;
+    width: 100%;
+    margin: auto;
+}
+
+.main{
+    overflow: hidden;
+}
+.firstCol {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background SVG styling */
+.background-svg {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 120%;
+    height: auto;
+    z-index:0; /* Ensures SVG is behind the main image */
+    opacity: 1; /* Optional: for subtle overlay */
+}
+
+.main-img{
+    z-index: 1;
+}
+
+.secondCol{
+    margin-top: 7%;
+}
+
+.secondCol .tag1{
+    font-size: 40px;
+    line-height: 60px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:600;
+    
+}
+
+h4{
+    font-size: 35px;
+}
+
+button{
+    padding: 10px 30px;
+    width: 300px;
+    border: none;
+    outline: none;
+    /* background: rgb(247, 43, 114); */
+    background: black;
+    color: white;border-radius: 3px;
+}
+
+button:hover{
+    background: rgb(233, 51, 115);
+}
+
+img{
+    width:70%;
+}
+
+.details{
+   width: 100%;
+   margin: auto;
+   display: flex;
+   justify-content: space-around;
+   margin-top: 20px;
+}
+
+#imgDet{
+    width: 60px;
+    height: 60px;
+}
+
+.shipping, .support, .money{
+    display: flex;
+}
+
+.infoContainer{
+    padding: 10px;
+}
+
+.infoDetails{
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(93, 90, 90);
+    font-family: futur;
+}
+
+.products{
+    margin-top: 50px;
+}
+
+p{
+    text-align: center;
+}
+@media (max-width:1200px) {
+    .secondCol .tag{
+        font-size: 30px;
+    }
+    h4{
+        font-size: 30px;
+    }
+}
+
+@media (max-width:1099px) {
+    
+    .details{
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width:900px) {
+    .secondCol .tag1{
+        font-size:30px;
+        line-height:40px;
+    }
+    .details{
+        margin-top: 10%;
+    }
+}
+
+@media (max-width:800px) {
+   
+    .details{
+        margin-top: 10%;
+    }
+    
+}
+
+@media (max-width:767px) {
+
+    .fashion-type{
+        display: none;
+    }
+    
+    .fashion-for{
+        position: relative;
+        z-index: 999;
+        display: block;
+    }
+
+    .secondCol .tag{
+        font-size: 35px;
+    }
+    h4{
+        font-size: 35px;
+    }
+    .shipping, .support, .money{
+        display: flex;
+        transform: scale(0.85);
+    }
+}
+
+@media (max-width:603px) {
+    
+    .secondCol .tag1{
+        font-size:30px;
+    }
+    h4{
+        font-size: 25px;
+    }
+    .details{
+        display: none;
+    }
+}

@@ -1,0 +1,39 @@
+
+
+<div class="newArrivals">
+  <button class="arrivals" [ngClass]="{ 'clicked': !isButtonClicked }" (click)="fetchProducts()">New Arrivals</button>
+  <button class="arrivals" [ngClass]="{ 'clicked': isButtonClicked }" (click)="getProductTrending()">Trending</button>
+</div>
+
+<div class="productBoard">
+
+  
+
+  <div *ngIf="isLoading" class="spinLoader">
+    <app-loader></app-loader>
+  </div>
+
+    <div class="cards" *ngIf="productsLoaded">
+        <div class="proCard" *ngFor="let product of productsData.data.content">
+          <div class="cardDetails">
+            <div class="imgCont">
+               <img [src]="product.imageUrl" alt="pro" (click)="getProduct(product.productId)">
+               <div class="like"><a title="add to favourites" (click)="addInFavSection(product.productId)"><i class="fa-sharp fa-regular fa-heart"></i></a></div>
+               <div class="buy-icon"><a (click)="addToCart(product.productId)" title="Add to cart"><i class="far fa-shopping-bag"></i></a></div>
+            </div>
+            <h2>{{ limitWords(product.productName) }}</h2>
+            <p class="proPrice">INR {{product.productPrice}} <span>onward</span></p>
+            <!-- <p *ngIf="product.productPrice>499" id="delivery">Free Delivery</p>-->
+            <!-- <div class="ratings">
+              <p id="rat">{{product.productRating}}<i class="fa fa-star"></i></p><span>2400 Reviews</span>
+            </div> -->
+          </div>
+         </div>
+    </div>
+    <div class="cards" *ngIf="!productsLoaded">
+      <div class="loader">
+         <img src="../../assets/Pinwheel.gif" alt="" id="imgLoader">
+      </div>
+   </div>
+</div>
+  
