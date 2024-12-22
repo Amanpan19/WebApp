@@ -1,0 +1,89 @@
+<marquee behavior="scroll" direction="left" scrollamount="6" style="font-family: futur; letter-spacing: 2px; font-size: 12px; background-color: rgb(0, 0, 0); color: rgb(253, 253, 253);">
+    🎉 Free Shipping on Orders Over ₹500! | 20% Off on New Arrivals – Use Code: NEW20 | Flash Sale: Up to 50% Off on Selected Items! 🎉
+</marquee>
+
+<div class="nav">
+    <!-- Logo and Search -->
+    <div class="logoBox">
+        <div class="imgLogo">
+            <img src="../../assets/images/logo_main.png" alt="logo-image" routerLink="" style="margin-bottom: 10px; cursor: pointer;">
+        </div>
+        <div class="logoText">
+            <p class="logo"><a routerLink="">
+                Rudra
+            </a></p>
+        </div>
+    </div>
+
+    <div class="searchImpl" style="width: 30%; margin-top: 40px; right: 25%; position: absolute; z-index: 999;">
+        <app-search></app-search>
+    </div>
+
+    <!-- Main Navigation -->
+    <ul class="list">
+        <li *ngIf="!role"><a [routerLink]="'/adminDash'">Admin Dash</a></li>
+        <li *ngIf="supplierValid"><a [routerLink]="'/supplierDash'">Supplier</a></li>
+        <li class="profile">
+            <a [routerLink]="'/profile'"><i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i></a>
+            <ul class="proList">
+                <li>Hello {{userName}}</li>
+                <li id="log"><a (click)="login()">{{loginTime}}</a></li>
+            </ul>
+        </li>
+        <li>
+            <a routerLink="/fav">
+                <div matBadge="{{noOfProductsInFav}}" matBadgeOverlap="false" class="custom-badge">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="'/cart'">
+                <div matBadge="{{noOfProductsInCart}}" matBadgeOverlap="false" class="custom-badge">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+            </a>
+        </li>
+        <li *ngIf="supplierVer">
+            <a *ngIf="!isMobile" [routerLink]="'/suppVerification'" style="font-weight: 600;">Become a Supplier</a>
+            <a *ngIf="isMobile" [routerLink]="'/suppVerification'"><i class="fa-solid fa-handshake"></i></a>
+        </li>
+    </ul>
+
+    <!-- Categories Menu -->
+    <!-- <div class="listLink" *ngIf="role">
+        <div class="menu-icon" (click)="toggleMenu()">
+            <i class="fa fa-angle-down" [class.rotated]="isMenuOpen" style="font-weight: 700;"></i>
+        </div>
+        <ul class="typeList" id="expandableMenu">
+            <li><a routerLink="/proCat/women">Women</a></li>
+            <li><a routerLink="/proCat/mens">Men</a></li>
+            <li><a routerLink="/proCat/kids">Kids</a></li>
+            <li><a routerLink="/proCat/homeDecor">Home & Kitchen</a></li>
+            <li><a routerLink="/proCat/footwear">Footwear</a></li>
+            <li><a routerLink="/proCat/electronic">Electronics</a></li>
+        </ul>
+    </div> -->
+</div>
+
+<!-- Bottom Navigation for Mobile View -->
+<div class="bottom-nav" *ngIf="isMobile">
+
+    <a routerLink=""><i class="fa-solid fa-house"></i></a>
+
+    <a (click)="navigateUser()"><i class="fa-light fa-user"></i></a>
+
+    <a routerLink="/fav">
+        <div matBadge="{{noOfProductsInFav}}" matBadgeOverlap="false" class="custom-badge">
+            <i class="fa-light fa-heart"></i>
+        </div>
+    </a>
+
+    <a [routerLink]="'/cart'">
+        <div matBadge="{{noOfProductsInCart}}" matBadgeOverlap="false" class="custom-badge">
+            <i class="fa-light fa-cart-shopping"></i>
+        </div>
+    </a>    
+
+    <a *ngIf="isMobile" [routerLink]="'/suppVerification'"><i class="fa-solid fa-handshake"></i></a>
+</div>

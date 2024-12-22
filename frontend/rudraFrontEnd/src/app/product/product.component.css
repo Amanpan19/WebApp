@@ -1,0 +1,480 @@
+.custom-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional background */
+    position: absolute; /* Position it over your content */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .spinner {
+    border: 8px solid #f3f3f3; /* Light gray */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px; /* Size of the loader */
+    height: 60px; /* Size of the loader */
+    animation: spin 2s linear infinite; /* Spin animation */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+
+
+.product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-top:50px;
+    height: 80%; 
+}
+
+.product span{
+    font-size: 20px;
+}
+
+.product span a{
+    color: rgb(245, 41, 116);
+}
+
+
+.proCont{
+    width: 70%;
+}
+
+img{
+    width: 300px;
+}
+
+#proTitle{
+    font-size: 27px;
+    text-align: center;
+    font-weight: 500;
+    color: rgb(118, 118, 118);
+    font-family:futur;
+}
+
+.desc{
+    margin-top: 20px;
+    position: relative;
+}
+
+.desc mat-expansion-panel{
+    background-color: white;
+    border-radius: 0;
+    border:1px solid rgb(210, 210, 210);
+    font-family: futur;
+    box-shadow: none;
+}
+
+mat-panel-title{
+    color: rgb(94, 93, 93);
+    font-family: futur;
+    font-weight: 600;
+}
+
+mat-expansion-panel p{
+    color: black;
+    font-family: futur;
+}
+
+.details{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgb(213, 205, 205);
+    border-radius: 4px;
+    position: relative;
+}
+
+#infoId{
+   position: relative;
+   border: 1px solid rgb(210, 210, 210);
+   padding: 4px 9px;
+   border-radius: 50%;
+   cursor: pointer;
+}
+
+#infoId #priDet{
+    position: absolute;
+    background: rgb(255, 254, 254);
+    color: rgb(18, 18, 18);
+    font-family: futur;
+    width: 400px;
+    top: 25px;
+    left: -5px;
+    visibility: hidden;
+    padding:10px;
+    border-radius: 4px;
+    box-shadow: 7px 12px 33px -9px rgba(48, 48, 48, 0.75);
+    line-height: 20px;
+    z-index: 5;
+}
+
+.tPrice{
+    padding-left: 30px;
+    font-family: futur;
+}
+
+#sug{
+    font-size: 20px;
+}
+
+#infoId:hover #priDet{
+    visibility: visible;
+}
+
+.sctSize{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid rgb(213, 205, 205);
+    border-radius: 4px;
+}
+
+.size{
+    display: flex;
+    justify-content: space-around;
+}
+
+.size a{
+    text-decoration: none;
+    padding: 4px 20px;
+    border: 1px solid rgb(223, 220, 220);
+    border-radius: 8px;
+    color: rgb(255, 0, 85);
+}
+
+.cardCont{
+    display: flex;
+}
+
+.fav{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .red{
+    color: #E4405F;
+  }
+
+.share{
+ margin-top: 10px;
+}  
+
+.shareOptions{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.fa-instagram {
+    color: #E4405F; /* Instagram pink */
+}
+
+.fa-whatsapp {
+    color: #25D366; /* WhatsApp green */
+}
+
+.fa-twitter {
+    color: #1DA1F2; /* Twitter blue */
+}
+
+.fav a, .share a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;          /* Adjust as needed */
+    height: 50px;         /* Make height equal to width */
+    background-color: white;
+    border-radius: 50%;   /* Ensures the container is circular */
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.cardCont:hover .fav, .share{
+    opacity: 1;
+}
+
+.favImg{
+    position: relative;
+}
+
+.cardContent{
+    width: 100%;
+    padding: 20px;
+    font-family: futur;
+}
+
+#proPri{
+    font-size: 20px;
+    color: rgb(86, 87, 87);
+    font-family: futur;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btnSty{
+    text-decoration: none;
+    padding: 10px 20px;
+    background:linear-gradient(45deg,rgb(255, 0, 85),rgb(245, 41, 116));
+    color: white;
+    font-size: 16px;
+    font-family: futur;
+    line-height: 20px;
+    outline: none;
+    border: none;
+}
+
+.btnSty:hover{
+    background:linear-gradient(45deg,rgb(255, 1, 86),rgb(229, 17, 126));
+}
+
+*:disabled {
+    background-color: gray; /* Disabled color */
+    color: lightgray;
+    cursor: not-allowed; /* Optional: shows disabled cursor */
+    opacity: 0.6; /* Optional: reduces opacity for a disabled look */
+}
+
+.suggestions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.proCrd{
+    background-color: white;
+    border: 1px solid rgb(194, 193, 193);
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.proSug{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+#imgPara{
+    width:250px;
+    height: 350px;
+}
+
+#proName{
+    text-align: center;
+    font-weight: 500;
+    margin-top: 5px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#proPrice{
+    font-size: 16px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    font-weight: 500;
+}
+
+span{
+    font-size: 13px;
+}
+
+span i{
+    font-size: 13px;
+    color: yellow;
+}
+
+#proShip{
+    padding: 4px 20px; 
+    background: rgb(255, 0, 102);
+    color: white;
+    text-align: center;
+    margin-bottom:2px;
+}
+
+.sctSize .size a:hover{
+    background:rgba(62, 63, 63, 0.286);
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width:1042px) {
+    .proCont{
+        width: 90%;
+    }
+}
+
+/* Tablet Screen */
+@media (max-width: 768px) {
+    .product {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30%;
+        height: auto;
+        padding: 0 10px;
+    }
+
+    .proCont {
+        width: 100%;
+    }
+
+    .cardCont {
+        flex-direction: column;
+    }
+
+    .cardImg, .cardContent {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .favImg {
+        display: block;
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .cardContent {
+        padding: 15px;
+        margin-top: -20px;
+    }
+
+    .size a {
+        padding: 3px 15px;
+        font-size: 14px;
+    }
+
+    #infoId #priDet{
+        width: 450px;
+        top: 25px;
+        left: -15rem;
+        visibility: hidden;
+    }
+
+    .btn {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .btnSty {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .fav{
+        top: -10px;
+        right: 10px;
+        transition: opacity 0.3s ease;
+        opacity: 1;
+      }
+
+      .fav a{
+        border: 1px solid black;
+        cursor: pointer;
+    }
+    
+
+}
+
+/* Mobile Screen */
+@media (max-width: 480px) {
+    .product {
+        margin-top: 10%;
+    }
+
+    .proCont {
+        width: 90%;
+    }
+
+    img {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    #proTitle {
+        font-size: 22px;
+    }
+
+    #proPri {
+        font-size: 18px;
+    }
+
+    .details, .sctSize, .desc {
+        padding: 5px;
+    }
+
+    .size a {
+        padding: 2px 10px;
+        font-size: 12px;
+    }
+
+    .btn {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btnSty {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .suggestions {
+        flex-direction: column;
+    }
+
+    .proCrd {
+        width: 100%;
+        max-width: 250px;
+        margin-bottom: 10px;
+    }
+
+    #imgPara {
+        width: 100%;
+        height: auto;
+    }
+
+    #proName {
+        font-size: 14px;
+    }
+
+    #proPrice {
+        font-size: 14px;
+    }
+
+    #infoId #priDet{
+        width: 350px;
+        top: 25px;
+        left: -15rem;
+        visibility: hidden;
+    }
+
+    
+}

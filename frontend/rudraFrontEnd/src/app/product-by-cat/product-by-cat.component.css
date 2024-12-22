@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.mainContainer {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .filterSection {
+    flex: 0 0 300px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .productBoard{
+    width: 100%;
+    height: auto;
+  }
+
+  .filterSection h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+  }
+
+  .filterGroup {
+    margin-bottom: 20px;
+  }
+
+  .filterTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .wrapper{
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 25px 40px;
+    /* box-shadow: 0 12px 35px rgba(0,0,0,0.1); */
+  }
+  header h2{
+    font-size: 24px;
+    font-weight: 600;
+  }
+  header p{
+    margin-top: 5px;
+    font-size: 16px;
+  }
+  .price-input{
+    width: 100%;
+    display: flex;
+    margin: 30px 0 35px;
+  }
+  .price-input .field{
+    display: flex;
+    width: 100%;
+    height: 35px;
+    align-items: center;
+  }
+  .field input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 19px;
+    margin-left: 12px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #999;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  .price-input .separator{
+    width: 130px;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider{
+    height: 5px;
+    position: relative;
+    background: #ddd;
+    border-radius: 5px;
+  }
+  .slider .progress{
+    height: 100%;
+    left: 25%;
+    right: 25%;
+    position: absolute;
+    border-radius: 5px;
+    background: #17A2B8;
+  }
+  .range-input{
+    position: relative;
+  }
+  .range-input input{
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -5px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background: #17A2B8;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  }
+  input[type="range"]::-moz-range-thumb{
+    height: 17px;
+    width: 17px;
+    border: none;
+    border-radius: 50%;
+    background: #17A2B8;
+    pointer-events: auto;
+    -moz-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  }
+
+img{
+    width: 228px;
+    height: 380px;
+    background-color: rgb(177, 177, 177);
+    border-radius: 3px;
+}
+
+
+
+.cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:20px;
+    
+}
+
+.like{
+    position: absolute;
+}
+
+
+.loader {
+    mix-blend-mode: multiply;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#imgLoader {
+    width: 80px;
+    height: 80px;
+}
+
+.proCard{
+    width: 250px;
+    padding:10px;
+    height: 530px;
+    border-radius: 5px;
+    /* border: 1px solid rgb(215, 213, 213); */
+    cursor: pointer;
+    transition:0.2s ease-out;
+}
+
+.imgCont{
+    position: relative;
+}
+
+.like{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+.buy-icon{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}  
+
+.like a, .buy-icon a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;          /* Adjust as needed */
+    height: 30px;         /* Make height equal to width */
+    background-color: white;
+    border-radius: 50%;   /* Ensures the container is circular */
+    font-size: 13px;
+}
+
+.like i{
+    color: black;
+}  
+
+.cardDetails:hover .like,
+.cardDetails:hover .buy-icon {
+    opacity: 1;
+}
+
+h2{
+    color: rgb(98, 93, 93);
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    font-family: futur;
+}
+
+h3{
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(66, 63, 63);
+    margin-top: -25px;
+    font-family: futur;
+}
+
+span{
+    font-size: 13px;
+    color: rgb(98, 93, 93);
+}
+
+#delivery{
+    padding:5px 20px;
+    /* background-color: rgb(143, 252, 194); */
+    background-color: rgb(130, 163, 251);
+    font-size: 11px;
+    text-align: center;
+    /* color: rgb(0, 138, 50); */
+    color: white;
+    font-weight: 500;
+    margin-top: -10px;
+}
+.ratings{
+    border-radius: 8px;
+    display: flex;
+}
+#rat{
+    color: rgb(255, 255, 255);
+    background-color: rgb(6, 143, 81);
+    padding:3px 4px;
+    border-radius:7%;
+    width:50px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#rat i{
+    margin-left: 4px;
+    font-size: 14px;
+}
+
+.ratings span{
+    margin-left: 10%;
+    margin-top: 4px;
+    font-size: 13px;
+    color: rgb(157, 155, 155);
+}
+
+@media (max-width:872px) {
+
+    .productBoard{
+        width: 98%;
+        margin: 100px auto;
+    }
+
+    .filterSection {
+        display: none;
+      }
+
+    img{
+        width: 180px;
+        height: 260px;
+        border-radius: 5px;
+    }
+
+    .proCard{
+        width: 200px;
+        height: 390px;
+        padding:10px;
+    }
+
+    .cardDetails .like,
+    .cardDetails .buy-icon {
+    opacity: 1;
+}
+
+    h2{
+        font-size: 12px;
+    }
+
+    h3{
+        font-size: 16px;
+        font-weight: 500;
+        color: rgb(66, 63, 63);
+        margin-top: -30px;
+        font-family: futur;
+    }
+
+    .ratings{
+        width: 170px;
+        display: flex;
+    }
+
+    .ratingSpan{
+        font-size: 10px;
+    }
+}
+
+@media (max-width:475px) {
+    img{
+        width: 150px;
+        height: 250px;
+        border-radius: 5px;
+    }
+
+    .proCard{
+        width: 170px;
+        padding:10px;
+    }
+
+    .ratings{
+        width: 170px;
+        display: flex;
+    }
+}
+
+@media (max-width:375px) {
+
+    .productBoard{
+        width: 100%;
+        margin: 100px auto;
+    }
+    img{
+        width: 150px;
+        height: 200px;
+        border-radius: 5px;
+    }
+
+    .proCard{
+        width: 170px;
+        padding:10px;
+    }
+
+    .ratingSpan{
+        font-size: 10px;
+    }
+}
