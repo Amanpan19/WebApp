@@ -7,3 +7,21 @@
     font-family: lazyDog;
     src: url("../assets/font/lazy_dog.ttf");
 }
+
+@font-face {
+    font-family: advent;
+    src: url("../assets/font/advent-pro.ttf");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: francois;
+    src: url("../assets/font/francois-one.regular.ttf");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: vag;
+    src: url("../assets/font/VAGRoundedStd-Bold.ttf");
+    font-weight: 600;
+}

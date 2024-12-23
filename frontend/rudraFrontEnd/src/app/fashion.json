@@ -47,6 +47,30 @@
           "name": "Sports Wear",
           "image": "../../assets/images/women/type/sportswear.png"
         }
+      ],
+      "kids":[
+        {
+          "name":"onesie",
+          "image":"../../assets/images/kids/type/onesie.png"
+        },
+        {
+          "name":"jackets",
+          "image":"../../assets/images/kids/type/jackets.png"
+        },
+        {
+          "name":"ethnicwear",
+          "image":"../../assets/images/kids/type/ethnicwear.png"
+        },
+        {
+          "name":"flip-flops",
+          "image":"../../assets/images/kids/type/flip-flops.png"
+        }
+      ],
+      "footwear":[
+        {
+          "name":"",
+          "images":""
+        }
       ]
     }
 }  

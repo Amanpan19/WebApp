@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import categoriesData from '../fashion.json';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-fashion-type',
@@ -13,12 +14,12 @@ import { CommonModule } from '@angular/common';
 export class FashionTypeComponent implements OnInit {
 
     category:any;
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,private proSer:ProductService){}
 
     ngOnInit(): void {
       this.category = categoriesData;
       console.log(this.category);
-      this.selectedType("womens");
+      this.selectedType(this.proSer.fashionType);
     }
 
     selectedType(fashionType:String){
@@ -35,9 +36,11 @@ export class FashionTypeComponent implements OnInit {
         break;
 
         case "kids" :
+          this.category = categories.kids;
         break;
 
-        case "electronics" :
+        case "footwear" :
+          this.category = categories.footwear;
         break;
 
         default:
