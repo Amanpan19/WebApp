@@ -19,11 +19,13 @@
   
     <!-- Price Range Filter -->
 
+    <hr>
 
+    <header>
+      <h2>Price Range</h2>
+    </header>
     <div class="wrapper">
-        <header>
-          <h2>Price Range</h2>
-        </header>
+        
       <div class="price-input">
           <div class="field">
             <span>Min</span>
@@ -44,6 +46,7 @@
       </div>
     </div>
   
+    <hr>
     <!-- Cloth Type Filter -->
     <div class="filterGroup">
       <span class="filterTitle">Cloth Type</span>
@@ -72,10 +75,11 @@
   <!-- Product Section -->
   <div class="productBoard">
     <!-- Products Loaded -->
-    <div class="cards" *ngIf="productsLoaded">
-      <div class="fashion-type">
-        <app-fashion-type></app-fashion-type>
+    <div class="fashion-type">
+      <app-fashion-type></app-fashion-type>
     </div>
+    <div class="cards" *ngIf="productsLoaded">
+      
       <div class="proCard" *ngFor="let product of productsData">
         <div class="cardDetails">
           <div class="imgCont">

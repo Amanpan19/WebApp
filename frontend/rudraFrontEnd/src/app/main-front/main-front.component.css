@@ -52,9 +52,9 @@ html {
 .secondCol .tag1{
     font-size: 40px;
     line-height: 60px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:vag;
     font-weight:600;
-    
+    letter-spacing: 2px;
 }
 
 h4{
@@ -175,7 +175,7 @@ p{
 @media (max-width:603px) {
     
     .secondCol .tag1{
-        font-size:30px;
+        font-size:20px;
     }
     h4{
         font-size: 25px;
