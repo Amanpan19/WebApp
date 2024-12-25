@@ -22,6 +22,7 @@ public class User {
     private String role;
     private long phoneNo;
     private String imageName;
+    private String gender;
 
     @PrePersist
     private void generateId() {

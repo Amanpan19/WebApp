@@ -51,6 +51,7 @@ public class UserService implements IUserService{
         userDto.setPhoneNo(user.getPhoneNo());
         userDto.setImageName(user.getImageName());
         userDto.setRole(user.getRole());
+        userDto.setGender(user.getGender());
 
         System.out.println(userDto);
 
@@ -99,6 +100,11 @@ public class UserService implements IUserService{
         if(user.getPhoneNo() != 0){
             existingUser.setPhoneNo(user.getPhoneNo());
             userDto.setPhoneNo(user.getPhoneNo());
+        }
+
+        if(user.getGender() !=null){
+            existingUser.setGender(user.getGender());
+            userDto.setGender(user.getGender());
         }
         userProxy.updateUser(userDto,email);
         return userRepo.save(existingUser);
