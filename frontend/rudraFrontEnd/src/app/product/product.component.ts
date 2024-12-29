@@ -29,8 +29,9 @@ export class ProductComponent {
   proPrice?:number;
   userData:any;
   productExistInCart:any=true;
+  favExist:any;
   loading:boolean=false;
-  productAdded:boolean=true;
+  productAdded:any;
 
   constructor(private proSer:ProductService,
      private cartSer:CartService, 
@@ -75,8 +76,9 @@ export class ProductComponent {
     })
 
     this.favSer.checkExisting(this.proId).subscribe({
-      next:data=>{
-
+      next:(data)=>{
+        this.productAdded=data.data;
+        console.log("Val of productAdded : "+this.productAdded);
       }
     })
 
@@ -224,24 +226,41 @@ export class ProductComponent {
   }
 
 
-  toggleFavourite(proId: number) {
+  // toggleFavourite(proId: number) {
 
+  //   this.favSer.checkExisting(proId).subscribe({
+  //     next:(data:any)=> {
+  //       if (data.data) {
+  //         this.productAdded=false;
+  //         this.removeFromFavourites(proId);
+  //       } else {
+  //         this.addToFavourites(proId);
+  //       }
+  //     },
+  //     error: err => {
+  //       this._snackBar.open('Product is already Present in fav.', 'error', {
+  //         duration: 2000,
+  //         panelClass: ['mat-toolbar', 'mat-warn'],
+  //         horizontalPosition: 'left',
+  //         verticalPosition: 'top'
+  //       });
+  //     }
+  //   });
+  // }
+
+  toggleFavourite(proId: number) {
     this.favSer.checkExisting(proId).subscribe({
-      next:(data:any)=> {
+      next: (data) => {
         if (data.data) {
-          this.productAdded=false;
+          this.productAdded = false;
           this.removeFromFavourites(proId);
         } else {
+          this.productAdded = true;
           this.addToFavourites(proId);
         }
       },
       error: err => {
-        this._snackBar.open('Product is already Present in fav.', 'error', {
-          duration: 2000,
-          panelClass: ['mat-toolbar', 'mat-warn'],
-          horizontalPosition: 'left',
-          verticalPosition: 'top'
-        });
+        console.error('Error toggling favorite:', err);
       }
     });
   }
