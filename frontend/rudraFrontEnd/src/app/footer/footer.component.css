@@ -6,8 +6,8 @@
     font-family: futur;
     justify-content: center;
     display: flex;
-    position: relative;
-    bottom: 0;
+    /* position: relative;
+    bottom: 0; */
 } 
 
 ul, ol {
