@@ -29,6 +29,8 @@ export class ProductByCatComponent {
   minRange: number = 0; 
   maxRange: number =10000;
 
+  val:boolean=true;
+
   constructor(
      private productService:ProductService, 
      private route:ActivatedRoute,
@@ -130,5 +132,25 @@ export class ProductByCatComponent {
         });
       }
      })
+  }
+
+  openRefineOption(){
+    const element = document.querySelector('.refineOption') as HTMLElement;
+    if(element){
+      if(this.val){
+        element.style.right='0';
+        this.val=false;
+        element.style.display='block';
+      }
+    }
+  }
+
+  closeRefineOption(){
+    const element = document.querySelector('.refineOption') as HTMLElement;
+    if(element){
+      element.style.right='-60%';
+      this.val=true;
+      element.style.display='block';
+    }
   }
 }
