@@ -4,6 +4,9 @@ import { UserService } from '../service/user.service';
 import { RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
+import { LoginService } from '../service/login.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +21,15 @@ export class ProfileComponent implements OnInit{
   userName:any='';
   email:any='';
   phoneNo:any='';
-  constructor(private userSer:UserService,private sanitizer:DomSanitizer,private dialog:MatDialog){}
+  gender:any='';
+  constructor(
+    private userSer:UserService,
+    private sanitizer:DomSanitizer,
+    private dialog:MatDialog, 
+    private logSer:LoginService,
+    private route:Router,
+    private _snackbar:MatSnackBar
+  ){}
 
   ngOnInit(): void {
 
@@ -29,6 +40,7 @@ export class ProfileComponent implements OnInit{
              this.email = data.userEmail;
              this.phoneNo = data.phoneNo;
              this.userName = data.userName;
+             this.gender = data.gender;
         }
     })
 
@@ -49,6 +61,22 @@ export class ProfileComponent implements OnInit{
 
   }
 
+  logOut(){
+    localStorage.removeItem('Token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('email');
+  
+    this.logSer.loginfailure();
+
+    this._snackbar.open('Logged Out successfully.....', 'success', {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-primary'],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'  
+    });
+    this.route.navigateByUrl('/');  
+    
+    }
 
   updateUser(){
     const dialogRef = this.dialog.open(UpdateUserComponent, {
