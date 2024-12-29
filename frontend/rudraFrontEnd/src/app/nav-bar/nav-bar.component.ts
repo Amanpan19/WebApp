@@ -167,7 +167,7 @@ export class NavBarComponent {
 
   navigateUser(){
 
-    if (this.loggedIn) {
+    if (this.logService.getLoginStatus()) {
       this.router.navigate(['/profile']);
     } else {
       const dialogRef = this.dialog.open(LoginComponent, {

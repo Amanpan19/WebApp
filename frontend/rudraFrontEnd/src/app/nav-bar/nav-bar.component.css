@@ -1,10 +1,20 @@
+marquee{
+    font-family: futur; 
+    letter-spacing: 2px; 
+    font-size: 12px; 
+    background-color: rgb(0, 0, 0); 
+    color: rgb(253, 253, 253);
+    z-index: 3;
+    position: relative;
+}
+
 .nav {
     width: 100%;
     /* background-color: rgb(253, 35, 78); */
-    background-color: #362828;
+    background-color: #1c1313;
     position: relative;
     top: -7px;
-    z-index: 9999;
+    z-index: 99;
     justify-content: space-between;
     /* border-bottom: 1px solid rgb(198, 197, 197); */
     box-sizing: border-box;
@@ -341,7 +351,7 @@ a {
     }
 
     .nav {
-        background:#133E87;
+        background:#09295f;
         /* background-color: rgb(255, 50, 74); */
 
     }

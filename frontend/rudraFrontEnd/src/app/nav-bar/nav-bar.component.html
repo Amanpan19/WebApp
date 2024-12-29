@@ -1,4 +1,4 @@
-<marquee behavior="scroll" direction="left" scrollamount="6" style="font-family: futur; letter-spacing: 2px; font-size: 12px; background-color: rgb(0, 0, 0); color: rgb(253, 253, 253);">
+<marquee behavior="scroll" direction="left" scrollamount="6">
     🎉 Free Shipping on Orders Over ₹500! | 20% Off on New Arrivals – Use Code: NEW20 | Flash Sale: Up to 50% Off on Selected Items! 🎉
 </marquee>
 
@@ -24,11 +24,11 @@
         <li *ngIf="!role"><a [routerLink]="'/adminDash'">Admin Dash</a></li>
         <li *ngIf="supplierValid"><a [routerLink]="'/supplierDash'">Supplier</a></li>
         <li class="profile">
-            <a [routerLink]="'/profile'"><i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i></a>
-            <ul class="proList">
+            <a (click)="navigateUser()" style="cursor:pointer;"><i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i></a>
+            <!-- <ul class="proList">
                 <li>Hello {{userName}}</li>
                 <li id="log"><a (click)="login()">{{loginTime}}</a></li>
-            </ul>
+            </ul> -->
         </li>
         <li>
             <a routerLink="/fav">
