@@ -72,7 +72,7 @@ button{
 }
 
 button:hover{
-    background: rgb(233, 51, 115);
+    background:linear-gradient(to right, rgb(36, 33, 34),rgb(91, 91, 91));
 }
 
 img{
