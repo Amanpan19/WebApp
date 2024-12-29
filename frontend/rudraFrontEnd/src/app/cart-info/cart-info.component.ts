@@ -7,6 +7,7 @@ import { MatIcon } from '@angular/material/icon';
 import { cartRequest } from '../model/cartRequest';
 import { ProductQtyReduceRequest } from '../model/ProductQtyReduceRequest';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-cart-info',
@@ -22,7 +23,12 @@ export class CartInfoComponent {
   quantity:number=1;
   userId:string="";
 
-  constructor(private cartService: CartService, private productService: ProductService, private _snackBar:MatSnackBar) {}
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService, 
+    private _snackBar:MatSnackBar,
+    private logSer:LoginService
+  ) {}
 
   ngOnInit(): void {
     this.loadCartProductDetails();
