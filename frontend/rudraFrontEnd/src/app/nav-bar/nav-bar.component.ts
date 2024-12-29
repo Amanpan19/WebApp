@@ -91,11 +91,19 @@ export class NavBarComponent {
       
       document.addEventListener("DOMContentLoaded",function(){
         window.addEventListener("scroll",function(){
+          const nav = document.querySelector('.nav') as HTMLElement;
           if(this.scrollY>320){
             document.querySelector('.nav')?.classList.add("sticky");
+            
+            if (nav) {
+                nav.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
+              }
           }
           else{
             document.querySelector('.nav')?.classList.remove("sticky");
+            if (nav) {
+              nav.style.boxShadow = "none";
+            }
           }
         });
       });

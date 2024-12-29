@@ -17,8 +17,8 @@ import { LoginService } from '../service/login.service';
   imports: [FormsModule,CommonModule,MatIcon],
 })
 export class CartInfoComponent {
-  cartDetailsLoaded:boolean=false;
 
+  cartDetailsLoaded:boolean=false;
   cartProductDetails: any[] = [];
   quantity:number=1;
   userId:string="";

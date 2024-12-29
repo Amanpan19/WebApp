@@ -1,1 +1,27 @@
-<p>favourite works!</p>
+
+<div class="itemNo">
+    <span style="font-weight: 600;font-family: vag;">My Wishlist : </span><span style="font-weight: 500;">{{noOfItems}} items</span>
+</div>
+<div class="favSection">
+    
+    <div class="cards">
+
+        <div class="letCard" *ngFor="let product of favProductDetails">
+            <i class="fa-solid fa-circle-xmark" (click)="removeFromFav(product.data.productId)" id="close"></i>
+            <div class="proImg">
+                <img [src]="product.data.imageUrl" alt="{{product.data.imageUrl}}">
+            </div>
+            <div class="productName">
+                <span>{{limitWords(product.data.productName)}}</span>
+            </div>
+            <div class="proPrice">
+                <span>Rs. {{product.data.productPrice}}</span>
+            </div>
+            <div class="moveToCart">
+                <a href="">Move To Cart</a>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

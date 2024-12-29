@@ -11,7 +11,8 @@ marquee{
 .nav {
     width: 100%;
     /* background-color: rgb(253, 35, 78); */
-    background-color: #1c1313;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+    background-color: #ffffff;
     position: relative;
     top: -7px;
     z-index: 99;
@@ -58,7 +59,7 @@ marquee{
 }
 
 .logoText .logo a {
-    color: white;
+    color: rgb(8, 8, 8);
     font-family: lazyDog;
     font-size: 45px;
     text-decoration: none;
@@ -67,7 +68,7 @@ marquee{
 
 @keyframes logoCol {
     100% {
-        color: aliceblue;
+        color: rgb(28, 29, 29);
     }
 }
 
@@ -90,7 +91,7 @@ a {
 }
 
 .list li a {
-    color: white;
+    color: rgb(10, 10, 10);
     padding: 5px 20px;
     text-align: center;
     font-size: 15px;
@@ -139,8 +140,8 @@ a {
 }
 
 .custom-badge .mat-badge-content {
-    background-color: rgb(255, 255, 255);
-    color: black;
+    background-color: rgb(255, 30, 90);
+    color: rgb(255, 255, 255);
 }
 
 #log a, #fav a {
@@ -347,13 +348,13 @@ a {
     }
 
     .bottom-nav a i{
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .nav {
-        background:#09295f;
+        /* background:#09295f; */
         /* background-color: rgb(255, 50, 74); */
-
+        background-color: #ffffff;
     }
 
     .menu-icon {
@@ -374,25 +375,11 @@ a {
 @media (max-width: 510px) {
     
 
-    /* .logoBox {
-        margin-left: 10px;
-        width: 40px;
-    } */
 
-    /* .list {
-        padding: 0;
-        justify-content: center;
-    } */
-/* 
-    .list li a {
-        font-size: 12px;
-    } */
 
     
 }
 
 @media (max-width: 480px) {
-    /* .list li a {
-        font-size: 11px;
-    } */
+ 
 }
