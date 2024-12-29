@@ -1,14 +1,28 @@
-<div class="productPage">
+
+
+<div class="addProductPage">
+
+  <div class="logoInfo">
+    <img src="../../assets/images/logo_main.png" alt="">
+    <div class="tag">
+      <span>Revaana</span>
+    </div>
+  </div>
+
+  <hr style="width: 90%; margin: 0 auto;">
+
+  <div class="productPage">
+
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
         <div class="form-row">
             <div>
                 <label for="category">Category:</label>
                 <select id="category" formControlName="category">
                   <option value="" disabled selected>Select Category</option>
                   <option value="mens">Mens</option>
-                  <option value="women">Women</option>
+                  <option value="womens">Womens</option>
                   <option value="kids">Kids</option>
-                  <option value="ethnic">Ethnic</option>
                   <option value="footwear">Footwear</option>
                   <option value="electronic">Electronic</option>
                   <option value="kitchen">Kitchen</option>
@@ -19,10 +33,7 @@
                 </div>
               </div>
 
-        </div>
-
-        <div class="form-row">
-            <div>
+              <div>
                 <label for="productName">Product Name:</label>
                 <input type="text" id="productName" placeholder="Enter Product Name" formControlName="productName" autocomplete="off">
                 <div id="err" *ngIf="productForm.get('productName')?.errors?.['required'] && productForm.get('productName')?.dirty">
@@ -30,6 +41,11 @@
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="form-row">
+            
             <div>
                 <label for="productPrice">Product Price:</label>
                 <input type="text" id="productPrice" placeholder="Enter Product Price" formControlName="productPrice" autocomplete="off">
@@ -44,6 +60,7 @@
                     Product Quantity is Required
                 </div>
             </div>
+
         </div>
 
         <div class="form-row">
@@ -58,15 +75,217 @@
         </div>
 
         <div class="form-row">
-            <div>
-                <label for="description">Description:</label>
-                <textarea id="description" placeholder="Enter Description" formControlName ="description" autocomplete="off"></textarea>
+
+          <div>
+            <label for="description">Description:</label>
+            <textarea id="description" placeholder="Enter Description" formControlName ="description" autocomplete="off"></textarea>
+            <div id="err" *ngIf="productForm.get('description')?.errors?.['required'] && productForm.get('description')?.dirty">
+              Description is Required
             </div>
+          </div>
+
         </div>
 
+        <div formGroupName="productDetails">
+
+          <div class="form-row"> 
+
+            <div>
+              <label for="cloth-Type">Cloth Type:</label>
+              <select id="cloth-Type" formControlName="clothType">
+                <option value="" disabled selected>Select Cloth Type</option>
+                <option value="cotton">Cotton</option>
+                <option value="linen">Linen</option>
+                <option value="silk">Silk</option>
+                <option value="nylon">Nylon</option>
+                <option value="denim">Denim</option>
+                <option value="velvet">velvet</option>
+                <option value="chiffon">Chiffon</option>
+                <option value="wool">Wool</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="return-details">
+              <!-- Radio buttons for returnAvail selection -->
+              <input type="radio" name="return14DayAvailability" id="check-1" value="true" formControlName="return14DayAvailability">
+              <input type="radio" name="return14DayAvailability" id="check-2" value="false" formControlName="return14DayAvailability">
+          
+              <span class="return-title">14 Day Return Availability</span>
+              <div class="types">
+                
+                <label for="check-1">
+                  <span class="check one"></span>
+                  <span class="return14DayAvailability">Yes</span>
+                </label>
+                
+                <label for="check-2">
+                  <span class="check two"></span>
+                  <span class="return14DayAvailability">No</span>
+                </label>
+              
+              </div>
+
+              <div id="err" *ngIf="productForm.get('return14DayAvailability')?.errors?.['required'] && productForm.get('return14DayAvailability')?.dirty">
+                Product color Is required.
+              </div>
+
+            </div>
+            
+          </div>
+
+          <div class="form-row">
+            
+              <div class="size-details" *ngIf="productForm.get('category')?.value !== 'footwear'">
+                <!-- Radio buttons for size selection -->
+                <input type="checkbox"  id="dot-1" value="S"   (change)="onCheckboxChange($event)">
+                <input type="checkbox"  id="dot-2" value="M"   (change)="onCheckboxChange($event)">
+                <input type="checkbox"  id="dot-3" value="L"   (change)="onCheckboxChange($event)">
+                <input type="checkbox"  id="dot-4" value="XL"  (change)="onCheckboxChange($event)">
+                <input type="checkbox"  id="dot-5" value="XXL" (change)="onCheckboxChange($event)">
+                <span class="size-title">Size Availability</span>
+                <div class="types">
+                  
+                  <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="size">S</span>
+                  </label>
+                  
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="size">M</span>
+                  </label>
+                  <!-- Label for Prefer not to say -->
+                  <label for="dot-3">
+                    <span class="dot three"></span>
+                    <span class="size">L</span>
+                  </label>
+    
+                  <label for="dot-4">
+                    <span class="dot four"></span>
+                    <span class="size">XL</span>
+                  </label>
+
+                  <label for="dot-5">
+                    <span class="dot five"></span>
+                    <span class="size">XXL</span>
+                  </label>
+                  
+                </div>
+                <div id="err" *ngIf="productForm.get('availableSize')?.errors?.['required'] && productForm.get('availableSize')?.dirty">
+                  Product Size Is required.
+                </div>
+              </div>
+
+              <div class="size-details" *ngIf="productForm.get('category')?.value === 'footwear'">
+                <!-- Radio buttons for size selection -->
+                <input type="checkbox" *ngIf="productForm.get('category')?.value === 'footwear'"  id="dot-1" value="08" (change)="onCheckboxChange($event)">
+                <input type="checkbox" *ngIf="productForm.get('category')?.value === 'footwear'"  id="dot-2" value="09" (change)="onCheckboxChange($event)">
+                <input type="checkbox" *ngIf="productForm.get('category')?.value === 'footwear'"  id="dot-3" value="10" (change)="onCheckboxChange($event)">
+                <input type="checkbox" *ngIf="productForm.get('category')?.value === 'footwear'"  id="dot-4" value="11" (change)="onCheckboxChange($event)">
+                <span class="size-title">Size Availability</span>
+                <div class="types">
+                  
+                  <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="size">8</span>
+                  </label>
+                  
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="size">9</span>
+                  </label>
+                  <!-- Label for Prefer not to say -->
+                  <label for="dot-3">
+                    <span class="dot three"></span>
+                    <span class="size">11</span>
+                  </label>
+    
+                  <label for="dot-4">
+                    <span class="dot four"></span>
+                    <span class="size">12</span>
+                  </label>
+                  
+                </div>
+                <div id="err" *ngIf="productForm.get('availableSize')?.errors?.['required'] && productForm.get('availableSize')?.dirty">
+                  Product Size Is required.
+                </div>
+              </div>
+
+
+          </div>
+
+        
+          <div class="form-row">
+
+            <div>
+              <label for="colors">Colors:</label>
+              <div style="display: flex;align-items: center;gap: 10px;">
+                <input type="color" #colorPicker />
+                <i (click)="addColor(colorPicker.value)" class="fa-sharp fa-solid fa-plus"
+                style="padding: 10px 20px; border: 2px solid rgb(215, 215, 215); cursor: pointer;"></i>
+              </div>
+              <ul>
+                <li *ngFor="let color of colorsAvail.controls; let i = index" style="display: flex; flex-wrap: wrap;">
+                  <span [style.background-color]="color.value" style="width: 20px; height: 20px; display: inline-block; border: 1px solid #000;"></span>
+                  {{ color.value }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i class="fa-duotone fa-thin fa-trash" (click)="removeColor(i)"
+                   style=" color: rgb(57, 98, 164); position:  relative; right: 0;"></i>
+                </li>
+              </ul>
+              <div id="err" *ngIf="colorsAvail.errors?.['required'] && colorsAvail.dirty">
+                At least one color is required.
+              </div>
+            </div>
+
+            <div>
+              <label for="fashionType">Fashion Type:</label>
+              <select id="fashionType" formControlName="fashionType">
+                <option value="" disabled selected>Select Fashion Type</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)"value="sportswear">Sportswear</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="ethnic">Ethnic</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)"value="casual">Casual</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)"value="formal">Formal</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)"value="party">Party</option>
+                <option *ngIf="productForm.get('category')?.value === 'womens'" value="jewellery">Jewellery</option>
+                <option *ngIf="productForm.get('category')?.value === 'footwear'" value="sneakers">Sneakers</option>
+                <option *ngIf="productForm.get('category')?.value === 'footwear'" value="flip-flop">Flip Flop</option>
+                <option *ngIf="productForm.get('category')?.value === 'footwear'" value="formal_shoes">Formal Shoes</option>
+                <option *ngIf="productForm.get('category')?.value === 'footwear'" value="sports_shoes">Sports Shoes</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="jacket">Jacket</option>
+                <option *ngIf="productForm.get('category')?.value === 'mens'" value="nehru_jackets">Nehru Jackets</option>
+                <option *ngIf="productForm.get('category')?.value === 'mens'" value="suits">Suits</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="jeans">Jeans</option>
+                <option *ngIf="productForm.get('category')?.value === 'mens'" value="dhotis">Dhotis</option>
+                <option *ngIf="productForm.get('category')?.value === 'womens'" value="sarees">Sarees</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="sweatshirt">Sweat-Shirt</option>
+              </select>
+
+              <div id="err" *ngIf="productForm.get('fashionType')?.errors?.['required'] && productForm.get('fashionType')?.dirty">
+                Fashion type Is required.
+              </div>
+            </div>
+
+          </div>
+
+            <!-- <div>
+              <label>Available Sizes:</label>
+              <div>
+                <label><input type="checkbox" formControlName="availableSize" value="S" /> S</label>
+                <label><input type="checkbox" formControlName="availableSize" value="M" /> M</label>
+                <label><input type="checkbox" formControlName="availableSize" value="XL" /> XL</label>
+                <label><input type="checkbox" formControlName="availableSize" value="XXL" /> XXL</label>
+                <label><input type="checkbox" formControlName="availableSize" value="XXXL" /> XXXL</label>
+              </div>
+            </div> -->
+          </div>
+      
+          
+
         <div class="btn">
-            <button type="submit" [disabled]="!productForm.valid">Submit</button>
+            <button type="submit">Submit</button>
         </div>
         
     </form>
+  </div>
 </div>
