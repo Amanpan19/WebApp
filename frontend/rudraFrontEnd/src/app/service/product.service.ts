@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   public productId:number=0;
-  public fashionType:string='';
+  public fashionType:string='mens';
 
   productUrl:string='http://localhost:9000/api/v1/productService';
 
