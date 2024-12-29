@@ -22,6 +22,7 @@ export class UpdateUserComponent implements OnInit {
   public uploadedImage:any=File;
   userName:string="";
   userPhone:any;
+  userGender:any="";
   fileName:string="";
   updationForm:any;
 
@@ -35,8 +36,8 @@ export class UpdateUserComponent implements OnInit {
       this.updationForm = this.fb.group({
     
         userName:['',[Validators.minLength(3)]],
-        phoneNo:[null,[Validators.pattern(/^[789]\d{9,9}$/)]]
-        
+        phoneNo:[null,[Validators.pattern(/^[789]\d{9,9}$/)]],
+        gender:['',[Validators.minLength(4)]]
       })
     }
 
@@ -47,10 +48,12 @@ export class UpdateUserComponent implements OnInit {
       
       this.userName = data.userName;
       this.userPhone = data.phoneNo;
+      this.userGender = data.gender;
 
       this.updationForm.patchValue({
         userName: this.userName,
-        phoneNo: this.userPhone
+        phoneNo: this.userPhone,
+        gender: this.userGender
       });
      })
   }
@@ -63,6 +66,10 @@ export class UpdateUserComponent implements OnInit {
 
   get phone(){
     return this.updationForm.get('phoneNo');
+  }
+
+  get gender(){
+    return this.updationForm.get('gender');
   }
 
   public onImageUpload(event:any) {
