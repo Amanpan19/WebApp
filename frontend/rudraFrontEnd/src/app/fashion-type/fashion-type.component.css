@@ -1,14 +1,16 @@
 .shop-by-category {
     text-align: center;
-    padding: 20px;
+    padding: 20px 0px;
     font-family:futur;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+
   }
   
   .categories {
     display: flex;
-    justify-content: center;
-    /* flex-wrap: wrap; */
-    /* gap: 5px; */
+    justify-content: flex-start;
   }
   
   .category {
@@ -37,7 +39,13 @@
   }
   
 
-  @media (max-width:500px) {
+  @media (max-width:540px) {
+
+    .categories {
+      display: flex;
+      justify-content: flex-start;
+    }
+
     .category {
       text-align: center;
       width: 90px;
