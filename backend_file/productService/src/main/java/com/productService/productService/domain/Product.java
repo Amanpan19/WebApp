@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Document
-public class Product {
+public class Product extends BaseEntity {
     @Id
     private String id;
     private int productId;
@@ -27,4 +27,5 @@ public class Product {
     private String description;
     private int views;
     private int dayViews;
+    private ProductInfo productDetails;
 }

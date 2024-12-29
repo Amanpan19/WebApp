@@ -1,6 +1,6 @@
 package com.productService.productService.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.productService.productService.component.Translator;
 import com.productService.productService.cover.ProductResponse;
@@ -31,7 +31,10 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addNewProduct")
-    public ResponseEntity<?> addProduct(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file,  @RequestParam("productData")String product) throws ProductAlreadyExistsException, IOException {
+    public ResponseEntity<?> addProduct(HttpServletRequest httpServletRequest,
+                                        @RequestParam("file") MultipartFile file,
+                                        @RequestParam("productData")String product)
+            throws ProductAlreadyExistsException, IOException {
         String role = (String)httpServletRequest.getAttribute("attr2");
 
         if ("adminRole".equals(role) || "supplier".equals(role)) {

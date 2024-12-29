@@ -2,6 +2,7 @@ package com.productService.productService.service;
 
 
 import com.productService.productService.domain.Product;
+import com.productService.productService.domain.ProductInfo;
 import com.productService.productService.exception.ProductAlreadyExistsException;
 import com.productService.productService.exception.ProductNotFoundException;
 import com.productService.productService.repository.ProductRepository;
@@ -50,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() throws ProductNotFoundException {
-        List<Product> productList = this.productRepository.findAll();
+        List<Product> productList = this.productRepository.findByActiveTrueAndDeletedFalse();
         if (productList.isEmpty()) {
             throw new ProductNotFoundException("No Product Found");
         }
@@ -75,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductByCategory(String category){
         List<Product>proByCategory=new ArrayList<>();
-        List<Product> productList = productRepository.findAll();
+        List<Product> productList = productRepository.findByActiveTrueAndDeletedFalse();
         for(Product product:productList){
             if(category.equals(product.getCategory())){
                 proByCategory.add(product);
