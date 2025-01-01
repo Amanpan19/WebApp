@@ -307,7 +307,7 @@ a {
 @media (max-width:541px) {
 
     .custom-badge .mat-badge-content {
-        background-color: rgb(255, 41, 95);
+        background-color: rgb(232, 56, 100);
         color: rgb(255, 255, 255);
     }
     
@@ -349,6 +349,13 @@ a {
 
     .bottom-nav a i{
         font-size: 15px;
+    }
+
+    #home{
+        padding: 16px;
+        border-radius: 50%;
+        background-color: #151515;
+        color: white;
     }
 
     .nav {
