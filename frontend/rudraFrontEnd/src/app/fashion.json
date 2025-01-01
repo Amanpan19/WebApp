@@ -63,13 +63,21 @@
         },
         {
           "name":"flip-flops",
-          "image":"../../assets/images/kids/type/flip-flops.png"
+          "image":"../../assets/images/footwear/flip-flop.png"
         }
       ],
       "footwear":[
         {
-          "name":"",
-          "images":""
+          "name":"Formal Shoes",
+          "image":"../../assets/images/footwear/formal.png"
+        },
+        {
+          "name":"Sneakers",
+          "image":"../../assets/images/footwear/sneakers.png"
+        },
+        {
+          "name":"Flip-flops",
+          "image":"../../assets/images/footwear/flip-flop.png"
         }
       ]
     }
