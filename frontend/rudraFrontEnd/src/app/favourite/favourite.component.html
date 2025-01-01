@@ -1,5 +1,5 @@
 
-<div class="itemNo">
+<div class="itemNo" *ngIf="favProductDetails.length !== 0">
     <span style="font-weight: 600;font-family: vag;">My Wishlist : </span><span style="font-weight: 500;">{{noOfItems}} items</span>
 </div>
 <div class="favSection">
@@ -8,7 +8,7 @@
 
         <div class="letCard" *ngFor="let product of favProductDetails">
             <i class="fa-solid fa-circle-xmark" (click)="removeFromFav(product.data.productId)" id="close"></i>
-            <div class="proImg">
+            <div class="proImg"  (click)="getProduct(product.data.productId)">
                 <img [src]="product.data.imageUrl" alt="{{product.data.imageUrl}}">
             </div>
             <div class="productName">
@@ -18,10 +18,17 @@
                 <span>Rs. {{product.data.productPrice}}</span>
             </div>
             <div class="moveToCart">
-                <a href="">Move To Cart</a>
+                <a (click)="moveToCart(product.data.productId)">Move To Cart</a>
             </div>
         </div>
 
+        <div class="emptyCart" *ngIf="favProductDetails.length === 0">
+            <p>Your Favourites section is empty. Add some products!</p>
+            <img src="../../assets/empty.png" alt="empty cart" style="display: flex;justify-content: center; align-items: center;">
+        </div>
+
     </div>
+
+   
     
 </div>

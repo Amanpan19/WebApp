@@ -3,6 +3,9 @@ import { FavouriteService } from '../service/favourite.service';
 import { ProductService } from '../service/product.service';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { cartRequest } from '../model/cartRequest';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'app-favourite',
@@ -20,7 +23,9 @@ export class FavouriteComponent implements OnInit {
   constructor(
     private favSer:FavouriteService,
     private proSer:ProductService,
-    private _snackBar:MatSnackBar
+    private _snackBar:MatSnackBar,
+    private router:Router,
+    private cartSer:CartService
   ){}
 
   ngOnInit(): void {
@@ -41,6 +46,35 @@ export class FavouriteComponent implements OnInit {
         
     })
   }
+
+  getProduct(productId:number){
+    this.proSer.productId=productId;
+    this.router.navigateByUrl('/product');
+   }
+
+  moveToCart(productId:number){
+      const request: cartRequest = {
+        productId: productId,
+        proQty: 1
+      };
+  
+       this.cartSer.addProductInCart(request).subscribe({
+        next:data=>{
+          this.cartSer.getNoOfProductsInCart().subscribe({
+            next: (data: any) => {
+              const updatedCount = data.data;
+              this.cartSer.notifyCartCountChange(updatedCount);
+            }
+          })
+          this._snackBar.open('Product added to Cart', 'success', {
+            duration: 2000,
+            panelClass: ['mat-toolbar', 'mat-primary'],
+            horizontalPosition: 'left',
+            verticalPosition: 'top' 
+          });
+        }
+       })
+    }
 
   limitWords(productName: string): string {
     const words = productName.split(' ');

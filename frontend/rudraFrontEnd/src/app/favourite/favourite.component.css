@@ -3,6 +3,12 @@
     margin: 0 auto;
 }
 
+.emptyCart{
+    text-align: center;
+    height: 70vh;
+    padding: 100px 0 30px;
+}
+
 .favSection{
     height: auto;
     margin-top: 40px;
@@ -30,7 +36,7 @@
 #close{
     position: absolute;
     right: 12px; top: 10px;
-    font-size: 26px;color: black;
+    font-size: 26px;color: rgba(0, 0, 0, 0.36);
 }
 
 .proImg{
