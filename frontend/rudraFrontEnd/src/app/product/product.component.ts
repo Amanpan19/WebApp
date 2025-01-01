@@ -32,6 +32,7 @@ export class ProductComponent {
   favExist:any;
   loading:boolean=false;
   productAdded:any;
+  sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   constructor(private proSer:ProductService,
      private cartSer:CartService, 
@@ -103,6 +104,10 @@ export class ProductComponent {
     return starsArray;
   }
 
+  isSizeAvailable(size: string): boolean {
+    return this.productData.data.productDetails.availableSize.includes(size);
+  }
+
   getProductByCat(){
    
     this.proSer.getProductByCategory(this.proCategory).subscribe({
@@ -171,32 +176,47 @@ export class ProductComponent {
   }
   
 
-  updatePrice(size:string){
-
-    if (size === this.previousSize) {
-      return; // Do nothing if the same size is clicked again
-  }
-
-    let priceMultiplier = 1; // Default multiplier for size S
-    const basePrice = this.productData.productPrice;
-
-        switch(size) {
-            case 'M':
-                priceMultiplier = 1.3;
-                break;
-            case 'L':
-                priceMultiplier = 1.5;
-                break;
-            case 'XL':
-                priceMultiplier = 1.7;
-                break;
-            case 'XXL':
-                priceMultiplier = 1.9;
-                break;
+  updatePrice(size: string): void {
+    
+    console.log(size);
+    
+    if (!this.productData.data.productDetails.availableSize.includes(size)) {
+      console.log(`Size ${size} is not available.`);
+      return;
     }
+  
+    // Prevent recalculating if the same size is clicked again
+    if (size === this.previousSize) {
+      console.log(`Size ${size} is already selected.`);
+      return;
+    }
+  
+    let priceMultiplier = 1; // Default multiplier for size S
+    const basePrice = this.productData.data.productPrice;
+  
+    switch (size) {
+      case 'M':
+        priceMultiplier = 1.3;
+        break;
+      case 'L':
+        priceMultiplier = 1.5;
+        break;
+      case 'XL':
+        priceMultiplier = 1.7;
+        break;
+      case 'XXL':
+        priceMultiplier = 1.9;
+        break;
+    }
+  
+    // Calculate the updated price
     this.proPrice = Math.round(basePrice * priceMultiplier);
+    console.log(`Price updated to ${this.proPrice} for size ${size}`);
+    
+    // Update the previous size
     this.previousSize = size;
   }
+  
 
   buyProduct(){}
 

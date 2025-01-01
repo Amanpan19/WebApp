@@ -70,11 +70,11 @@
                 <div class="sctSize" *ngIf="proCategory !== 'homeDecor' && proCategory !== 'kitchen' && proCategory !== 'footwear'">
                     <h6 style="font-family:Verdana, Geneva, Tahoma, sans-serif;font-size: 16px;">Select Size</h6>
                     <div class="size">
-                        <a (click)="updatePrice('S')">S</a>
-                        <a (click)="updatePrice('M')">M</a>
-                        <a (click)="updatePrice('L')">L</a>
-                        <a (click)="updatePrice('XL')">XL</a>
-                        <a (click)="updatePrice('XXL')">XXL</a>
+                        <a *ngFor="let size of sizes" (click)="updatePrice(size)" 
+                            [class.inactive]="!isSizeAvailable(size)"
+                            [class.crossed]="!isSizeAvailable(size)">
+                            {{ size }}
+                        </a>
                     </div>
                 </div>
 

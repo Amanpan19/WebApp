@@ -129,6 +129,7 @@ mat-expansion-panel p{
 .size{
     display: flex;
     justify-content: space-around;
+    font-size: 14px;
 }
 
 .size a{
@@ -137,6 +138,15 @@ mat-expansion-panel p{
     border: 1px solid rgb(223, 220, 220);
     border-radius: 8px;
     color: rgb(255, 0, 85);
+}
+
+.size a.inactive {
+    pointer-events: none; /* Disable click */
+    color: grey; /* Dim the color */
+}
+
+.size a.crossed {
+    text-decoration: line-through; /* Add a line crossing */
 }
 
 .cardCont{
