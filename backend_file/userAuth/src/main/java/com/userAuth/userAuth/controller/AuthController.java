@@ -1,12 +1,18 @@
 package com.userAuth.userAuth.controller;
 
 
+import com.userAuth.userAuth.component.Translator;
+import com.userAuth.userAuth.cover.AuthResponse;
+import com.userAuth.userAuth.cover.ResponseHelper;
 import com.userAuth.userAuth.exception.UserAlreadyPresentException;
 import com.userAuth.userAuth.exception.UserNotFound;
 import com.userAuth.userAuth.model.User;
 import com.userAuth.userAuth.model.UserDto;
+import com.userAuth.userAuth.request.CheckForgotPassRequest;
+import com.userAuth.userAuth.response.CheckOtpPassForgotResponse;
 import com.userAuth.userAuth.service.IAuthService;
 import com.userAuth.userAuth.service.ITokenGenerator;
+import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,5 +62,25 @@ public class AuthController {
     public ResponseEntity<?> removeUser(@PathVariable String email) throws UserNotFound {
         authService.removeUser(email);
         return new ResponseEntity<>("User Removed..!",HttpStatus.OK);
+    }
+
+    @GetMapping("/user/email/verify")
+    @SuppressWarnings("unchecked")
+    public AuthResponse<Boolean> emailVerification(@RequestParam String email) throws UserNotFound {
+
+        boolean response = authService.emailVerification(email);
+        return ResponseHelper.createResponseForFlags(new AuthResponse<Boolean>(), response,
+                Translator.toLocale("otp.sent.success", null),
+                Translator.toLocale("email.verified.failed", null));
+    }
+
+    @PutMapping("/forgot/pw")
+    @SuppressWarnings("unchecked")
+    public AuthResponse<CheckOtpPassForgotResponse> otpVerification(@RequestBody CheckForgotPassRequest request){
+
+        CheckOtpPassForgotResponse response = authService.forgotPass(request);
+        return ResponseHelper.createResponse(new AuthResponse<CheckOtpPassForgotResponse>(), response,
+                Translator.toLocale("pass.check.code.success", null),
+                Translator.toLocale("pass.check.code.failed", null));
     }
 }
