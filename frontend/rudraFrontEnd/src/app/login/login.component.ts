@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../service/login.service';
@@ -13,9 +13,10 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   responseData:any;
   formData: any;
+  private tokenKey = 'Token';
 
   constructor(
     private fb:FormBuilder,
@@ -26,14 +27,17 @@ export class LoginComponent {
   ){
 
     this.formData=this.fb.group({
-      userEmail : ["",[Validators.required,this.checkEmail]],
+      email : ["",[Validators.required,this.checkEmail]],
       password : ["",[Validators.required,Validators.minLength(7)]]
     }) 
 
   }
+  ngOnInit(): void {
+    
+  }
   
    getEmail(){
-    return this.formData.get('userEmail');
+    return this.formData.get('email');
    }
   
    getPassword(){
@@ -82,6 +86,11 @@ export class LoginComponent {
    }
 
    clear(){
+    this.dialogRef.close();
+  }
+
+  forGotPass(){
+    this.routerComp.navigateByUrl("/forgotPass")
     this.dialogRef.close();
   }
 
