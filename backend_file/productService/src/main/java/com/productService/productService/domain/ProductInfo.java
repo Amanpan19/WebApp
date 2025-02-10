@@ -10,9 +10,10 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductInfo extends BaseEntity{
-    private String clothType;
+    private String clothType; // clothe type : Cotton etc.
     private List<String>availableSize;
     private boolean return14DayAvailability;
     private List<String> colorsAvail;
-    private String fashionType;
+    private String fashionType; // casual
+    private List<String> proTags;
 }
