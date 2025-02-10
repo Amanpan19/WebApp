@@ -7,7 +7,7 @@ footer{
     border-top-left-radius: 125px;
     line-height: 20px;
     padding: 80px 0 30px;
-    color: #fff;
+    color: #ffffff;
 }
 
 img{
@@ -60,7 +60,7 @@ ul li{
 
 ul li a{
     text-decoration: none;
-    color: #fff;
+    color: #e2e2e2;
 }
 
 form{
