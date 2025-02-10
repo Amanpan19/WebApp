@@ -97,7 +97,7 @@
           <p>Refine By</p>
         </div>
         <div class="icon">
-          <i class="fa-regular fa-sliders"></i>
+          <i class="fa-light fa-sliders"></i>
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@
           <div class="imgCont">
             <img [src]="product.imageUrl" alt="" (click)="getProduct(product.productId)">
             <div class="like"><a (click)="addInFavSection(product.productId)"><i class="fa-sharp fa-regular fa-heart"></i></a></div>
-            <div class="buy-icon"><a (click)="addToCart(product.productId)"><i class="far fa-shopping-bag"></i></a></div>
+            <div class="buy-icon"><a ><i class="fa-sharp fa-regular fa-bag-shopping"></i></a></div>
           </div>
           <h2>{{ limitWords(product.productName)}}</h2>
           <h3>₹{{product.productPrice}} <span>onward</span></h3>
