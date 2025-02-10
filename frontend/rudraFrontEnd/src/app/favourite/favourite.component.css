@@ -1,12 +1,47 @@
+.myWishList{
+    background: rgb(0, 22, 38);
+    padding: 70px 20px;
+}
+
+#paraWish{
+    color: white;
+    font-size: 55px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 55px;
+    margin-bottom: 0px;
+}
+
 .itemNo{
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
+    text-align: center;
 }
 
 .emptyCart{
     text-align: center;
-    height: 70vh;
-    padding: 100px 0 30px;
+    height: 90vh;
+    padding: 80px 0 80px;
+    line-height: 70px;
+    margin-bottom: 100px;
+}
+
+.emptyCart>img{
+    margin: 0 auto;
+    display: block;
+}
+
+#emptyPara{
+    font-size: 40px; 
+    font-weight: 600;
+}
+
+#backBtn{
+    background: rgb(19, 96, 185);
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .favSection{
@@ -91,30 +126,37 @@
     justify-content: center;
 }
 @media (max-width:640px) {
+
+    .myWishList{
+        padding: 30px 20px;
+    }
+
     .favSection {
-        flex-direction: column; /* Stack the cards vertically */
+        /* flex-direction: column; */
         align-items: center;
         margin-top: 20px; /* Reduce margin for smaller screens */
     }
 
     .cards {
-        flex-direction: column; /* Arrange cards in a single column */
+        /* flex-direction: column; */
         align-items: center; /* Center-align the cards */
-        gap: 20px; /* Reduce the gap between cards */
+        gap: 10px; /* Reduce the gap between cards */
     }
 
     .letCard {
         width: 90%; /* Reduce the card width */
-        max-width: 300px; /* Ensure a maximum width for better readability */
+        max-width: 190px; /* Ensure a maximum width for better readability */
     }
 
-    .proImg {
-        width: 100%; /* Ensure image fits the card width */
+    .proImg{
+        width: 100%;
+        /* max-width: 200px; */
     }
 
-    .proImg img {
-        width: 100%; /* Make the image responsive */
-        height: auto; /* Maintain aspect ratio */
+
+    .proImg img{
+        width: 100%;
+        height: 290px;
     }
 
     .productName span,
@@ -136,5 +178,15 @@
         font-size: 20px; /* Adjust icon size */
         top: 8px; 
         right: 8px;
+    }
+    #emptyPara{
+        font-size: 30px;
+        line-height: 50px;
+    }
+}
+
+@media (max-width:619px) {
+    .letCard{
+        max-width: 45%;
     }
 }
