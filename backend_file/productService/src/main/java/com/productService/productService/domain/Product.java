@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +28,6 @@ public class Product extends BaseEntity {
     private String description;
     private int views;
     private int dayViews;
+    private List<String>productTags;
     private ProductInfo productDetails;
 }
