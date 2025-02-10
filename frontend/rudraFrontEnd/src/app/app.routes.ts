@@ -13,14 +13,16 @@ import { ProductComponent } from './product/product.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { ProductByCatComponent } from './product-by-cat/product-by-cat.component';
 import { CartInfoComponent } from './cart-info/cart-info.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 export const routes: Routes = [
     {
        path:"",
        component:MainFrontComponent, 
-       title:"CloudCart | Home"
+       title:"Rivaana | Home"
     },{
       path:"login",
       component:LoginComponent,
@@ -83,5 +85,20 @@ export const routes: Routes = [
         path:"cart",
         component:CartInfoComponent,
         title:"Cart"
+    },
+    {
+        path:"forgotPass",
+        component:ForgotPasswordComponent,
+        title:"Forgot | Password"
+    },
+    {
+        path:"about",
+        component:AboutUsComponent,
+        title:"About Us"
+    },
+    {
+        path:"contact",
+        component:ContactComponent,
+        title:"Contact Us"
     }
 ];
