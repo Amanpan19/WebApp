@@ -1,4 +1,4 @@
-<marquee behavior="scroll" direction="left" scrollamount="6" style="font-family: futur; letter-spacing: 2px; font-size: 12px; background-color: rgb(0, 0, 0); color: rgb(253, 253, 253);">
+<marquee behavior="scroll" direction="left" scrollamount="6">
     🎉 Free Shipping on Orders Over ₹500! | 20% Off on New Arrivals – Use Code: NEW20 | Flash Sale: Up to 50% Off on Selected Items! 🎉
 </marquee>
 
@@ -24,11 +24,13 @@
         <li *ngIf="!role"><a [routerLink]="'/adminDash'">Admin Dash</a></li>
         <li *ngIf="supplierValid"><a [routerLink]="'/supplierDash'">Supplier</a></li>
         <li class="profile">
-            <a [routerLink]="'/profile'"><i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i></a>
-            <ul class="proList">
+            <a (click)="navigateUser()" style="cursor:pointer;">
+                <i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i>
+            </a>
+            <!-- <ul class="proList">
                 <li>Hello {{userName}}</li>
                 <li id="log"><a (click)="login()">{{loginTime}}</a></li>
-            </ul>
+            </ul> -->
         </li>
         <li>
             <a routerLink="/fav">
@@ -69,9 +71,10 @@
 <!-- Bottom Navigation for Mobile View -->
 <div class="bottom-nav" *ngIf="isMobile">
 
-    <a routerLink=""><i class="fa-solid fa-house"></i></a>
+    <a *ngIf="role" [routerLink]="'/suppVerification'"><i class="fa-light fa-handshake"></i></a>
 
-    <a (click)="navigateUser()"><i class="fa-light fa-user"></i></a>
+    <a [routerLink]="'/adminDash'" *ngIf="!role"><i class="fa-sharp fa-light fa-gear"></i></a>
+    
 
     <a routerLink="/fav">
         <div matBadge="{{noOfProductsInFav}}" matBadgeOverlap="false" class="custom-badge">
@@ -79,11 +82,13 @@
         </div>
     </a>
 
+    <a routerLink="" ><i class="fa-solid fa-house" id="home"></i></a>
+
     <a [routerLink]="'/cart'">
         <div matBadge="{{noOfProductsInCart}}" matBadgeOverlap="false" class="custom-badge">
             <i class="fa-light fa-cart-shopping"></i>
         </div>
     </a>    
 
-    <a *ngIf="isMobile" [routerLink]="'/suppVerification'"><i class="fa-solid fa-handshake"></i></a>
+    <a (click)="navigateUser()"><i class="fa-light fa-user"></i></a>
 </div>

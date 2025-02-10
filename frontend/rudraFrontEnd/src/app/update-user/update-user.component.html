@@ -24,11 +24,17 @@
                 </div>
             </div>
 
+            <!-- gender -->
+            <div id="genderInp">
+                <span>Gender</span>
+                <input type="text"  formControlName="gender">
+            </div>
+
             <div id="userInp">
                 <label for="image" class="file-label">Upload Image <i class="fa fa-upload"></i></label>
                 <input type="file" accept="images/*" (change)="onImageUpload($event)" id="image" class="file-input">
             </div>
-            <p style="text-align: center;color:black;">{{fileName}}</p>
+            <p style="text-align: center;color:white; font-family: futur;">{{fileName}}</p>
 
             <br>
 

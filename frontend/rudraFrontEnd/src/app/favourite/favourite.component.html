@@ -1,1 +1,39 @@
-<p>favourite works!</p>
+
+<div class="myWishList">
+    <p id="paraWish">Wishlist</p>
+</div>
+
+<div class="itemNo" *ngIf="favProductDetails.length !== 0">
+    <span style="font-weight: 600;font-family: vag;">My Wishlist : </span><span style="font-weight: 500;">{{noOfItems}} items</span>
+</div>
+<div class="favSection">
+    
+    <div class="cards">
+
+        <div class="letCard" *ngFor="let product of favProductDetails">
+            <i class="fa-solid fa-circle-xmark" (click)="removeFromFav(product.data.productId)" id="close"></i>
+            <div class="proImg"  (click)="getProduct(product.data.productId)">
+                <img [src]="product.data.imageUrl" alt="{{product.data.imageUrl}}">
+            </div>
+            <div class="productName">
+                <span style="overflow: hidden;height: 20px;">{{limitWords(product.data.productName)}}</span>
+            </div>
+            <div class="proPrice">
+                <span>Rs. {{product.data.productPrice}}</span>
+            </div>
+            <div class="moveToCart">
+                <a (click)="navigateToSelect(product.data.productId)">Move To Cart</a>
+            </div>
+        </div>
+
+        <div class="emptyCart" *ngIf="favProductDetails.length === 0">
+            <p id="emptyPara">Your wishlist is empty.</p>
+            <img src="../../assets/empty.png" alt="empty cart">
+            <a id="backBtn" routerLink="">Return to shop</a>
+        </div>
+
+    </div>
+
+   
+    
+</div>

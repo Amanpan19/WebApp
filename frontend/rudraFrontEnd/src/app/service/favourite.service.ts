@@ -53,7 +53,7 @@ export class FavouriteService {
       "Authorization":"Bearer "+localStorage.getItem('Token')
     });
     let reqOption = {headers:httpHeader}
-    return this.httpClient.get(`${this.favUrl}/check-exist?productId=${productId}`,reqOption)
+    return this.httpClient.get<{data:boolean}>(`${this.favUrl}/check-exist?productId=${productId}`,reqOption)
   }
 
   notifyFavCountChange(count: number) {

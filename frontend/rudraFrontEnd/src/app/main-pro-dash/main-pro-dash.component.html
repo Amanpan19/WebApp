@@ -1,0 +1,85 @@
+<div class="mainFrontDash">
+    <div class="products">
+        <div class="heading">
+            <span>Men's Tranding Collection</span>
+            <a href="" id="seeMore">See More</a>
+        </div>
+        <div class="scroller1">
+            <div class="loader" *ngIf="!menProLoading">
+                <img src="../../assets/Pinwheel.gif" alt="" id="imgLoader">
+             </div>
+            <button class="scroll-btn left" (click)="scroll('container1', -300)">&#8249;</button>
+            <div class="container1">
+                <div class="cards" *ngFor="let product of mensProduct" (click)="getProduct(product.productId)">
+                    <!-- <div class="pro" > -->
+                        <div class="image">
+                            <img [src]="product.imageUrl" alt="">
+                        </div>
+                        <div class="info">
+                            <p>{{product.productName}}</p>
+                            <!-- <p>{{product.productPrice}}</p> -->
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <button class="scroll-btn right" (click)="scroll('container1', +300)">&#8250;</button>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="../../assets/images/banner/womenBanner.png" alt="" srcset="">
+    </div>
+    <div class="products">
+        <div class="heading">
+            <span>Women's Tranding Collection</span>
+            <a href="" id="seeMore">See More</a>
+        </div>
+        <div class="scroller2">
+            <div class="loader" *ngIf="!womenProLoading">
+                <img src="../../assets/Pinwheel.gif" alt="" id="imgLoader">
+             </div>
+            <button class="scroll-btn left" (click)="scroll('container2', -300)">&#8249;</button>
+            <div class="container2">
+                <div class="cards" *ngFor="let product of womensProduct" (click)="getProduct(product.productId)">
+                    <div class="image">
+                        <img [src]="product.imageUrl" alt="">
+                    </div>
+                    <div class="info">
+                        <p>{{product.productName}}</p>
+                        <!-- <p>{{product.productPrice}}</p> -->
+                    </div>
+                </div>
+            </div>
+            <button class="scroll-btn right" (click)="scroll('container2', +300)">&#8250;</button>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="../../assets/images/banner/hoodieBanner.png" alt="" srcset="">
+    </div>
+    <div class="products">
+        <div class="heading">
+            <span>Unisex Hoodies</span>
+        </div>
+        <div class="scroller3">
+            <div class="loader" *ngIf="!seasonLoading">
+                <img src="../../assets/Pinwheel.gif" alt="" id="imgLoader">
+             </div>
+            <button class="scroll-btn left" (click)="scroll('container3', -300)">&#8249;</button>
+            <div class="container3">
+                <div class="cards" *ngFor="let product of seasonSpecificProduct" (click)="getProduct(product.productId)">
+                    <div class="image">
+                        <img [src]="product.imageUrl" alt="">
+                    </div>
+                    <div class="info">
+                        <p>{{product.productName}}</p>
+                        <!-- <p>{{product.productPrice}}</p> -->
+                    </div>
+                </div>
+            </div>
+            <button class="scroll-btn right" (click)="scroll('container', +300)">&#8250;</button>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="../../assets/images/banner/blackSaree-banner.png" alt="" srcset="">
+    </div>
+    
+</div>

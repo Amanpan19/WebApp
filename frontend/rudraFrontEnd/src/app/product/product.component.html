@@ -1,20 +1,23 @@
 <!-- Loader -->
 
-<div *ngIf="loading" class="custom-loader">
-    <div class="spinner"></div>
+<div *ngIf="loading" id="loader">
+    <img src="../../assets/Pinwheel.gif" alt="" id="spinner">
 </div>
 
 <div class="product">
-    <Span><a routerLink="">Home</a>/{{productData.data.productName}}</Span>
+    
+    <div>
+        <!-- <Span id="mainTag"><a routerLink="">Home</a>/{{productData.data.productName}}</Span> -->
+    </div>
     <div class="proCont">
         <div class="cardCont" *ngIf="!loading">
             <div class="cardImg">
                 <div class="favImg">
-                    <img [src]="productData.data.imageUrl" alt="">
+                    <img [src]="productData.data.imageUrl" alt="" id="prodImg">
                     <div class="fav">
                         <a (click)="toggleFavourite(productData.data.productId)">
-                            <i class="fa-sharp fa-regular fa-heart" *ngIf="productAdded"></i>
-                            <i class="fa-sharp fa-solid fa-heart" *ngIf="!productAdded" ></i>
+                            <i class="fa-sharp fa-regular fa-heart" *ngIf="!productAdded"></i>
+                            <i class="fa-sharp fa-solid fa-heart" *ngIf="productAdded" ></i>
                         </a>
                     </div>
                 </div>
@@ -48,7 +51,7 @@
                                     </tr>
                                 </table>
                                 <hr style="width: 90%;margin: auto;color: black;margin: 10px;">
-                                <p>
+                                <p class="mrpDetails">
                                     MRP is inclusive of all taxes This product has an MRP (Maximum Retail Price) 
                                     set by the supplier. As per govt. guidelines, we recommend that you do not sell
                                     the product at higher price than MRP.
@@ -67,11 +70,11 @@
                 <div class="sctSize" *ngIf="proCategory !== 'homeDecor' && proCategory !== 'kitchen' && proCategory !== 'footwear'">
                     <h6 style="font-family:Verdana, Geneva, Tahoma, sans-serif;font-size: 16px;">Select Size</h6>
                     <div class="size">
-                        <a (click)="updatePrice('S')">S</a>
-                        <a (click)="updatePrice('M')">M</a>
-                        <a (click)="updatePrice('L')">L</a>
-                        <a (click)="updatePrice('XL')">XL</a>
-                        <a (click)="updatePrice('XXL')">XXL</a>
+                        <a *ngFor="let size of sizes" (click)="updatePrice(size)" 
+                            [class.inactive]="!isSizeAvailable(size)"
+                            [class.crossed]="!isSizeAvailable(size)">
+                            {{ size }}
+                        </a>
                     </div>
                 </div>
 
@@ -85,7 +88,7 @@
                 </div>
 
                 <div class="btn">
-                    <button (click)="addProductToCart()" class="btnSty" [disabled]=" productExistInCart.data === true">
+                    <button (click)="navigateToSelect(productData.data.productId)" class="btnSty" [disabled]=" productExistInCart.data === true">
                         <i class="fa-solid fa-cart-shopping"></i>
                         Add To Cart
                     </button>
@@ -96,7 +99,7 @@
     </div>
 </div>
 <div class="diversion">
-    <hr style="width: 90%;margin: auto; padding: 30px;">
+    <hr style="width: 90%;margin: auto; padding: 10px;">
 </div>
 
 

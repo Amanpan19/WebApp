@@ -1,0 +1,54 @@
+
+.imgCont{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+img{
+    width: 90%;
+}
+
+
+.mainAbout{
+    font-family:futur;
+}
+
+.heading{
+    padding: 30px;
+    background:  rgb(255, 1, 90);
+    color: white;
+    height: 100px;
+    line-height: 40px;
+}
+
+
+.heading .about{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    word-wrap: break-word;
+    
+}
+
+.intro{
+    padding: 5%;
+}
+
+#title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#info{
+    font-size: 14px;
+}
+
+@media (max-width:660px) {
+    img{
+        width: 100%;
+    }
+    
+}

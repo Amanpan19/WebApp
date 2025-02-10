@@ -4,26 +4,27 @@
     <form [formGroup]="formData" (ngSubmit)="loginCheck()">
       <h2>Login</h2>
       <div class="inputData">
-         <input type="text" id="email" formControlName="userEmail" autocomplete="off">
-         <label for="email"><i class="fa-duotone fa-solid fa-envelope"></i> Email</label>
+         <input type="text" id="email" formControlName="email" autocomplete="off">
+         <label for="email"><i class="fa-sharp fa-solid fa-envelope"></i> Email</label>
   
-         <div id="err" *ngIf="formData.get('userEmail')?.errors?.['required'] && formData.get('userEmail')?.dirty">
+         <div id="err" *ngIf="formData.get('userEmail')?.errors?.['required'] && formData.get('email')?.dirty">
           Email is required
         </div>
   
-        <div id="err" *ngIf="formData.get('userEmail')?.errors?.['checkEmail']===false && formData.get('userEmail')?.dirty">
+        <div id="err" *ngIf="formData.get('userEmail')?.errors?.['checkEmail']===false && formData.get('email')?.dirty">
           Email is not valid
         </div>
         
       </div>
       <div class="inputData">
           <input type="text" id="password" formControlName="password" autocomplete="off">
-          <label for="password"><i class="fa-duotone fa-solid fa-key"></i> Password</label>
+          <label for="password">
+            <i class="fa-sharp fa-solid fa-key"></i> Password</label>
       </div>
-      <p id="forPass"><a href="">Forget Password?</a></p>
+      <p id="forPass"><a (click)="forGotPass()" style="cursor: pointer; color: rgb(0, 170, 255);">Forget Password?</a></p>
       <div class="container">
           
-             <button type="submit"><i class="fa-duotone fa-solid fa-right-to-bracket"></i> Login</button>
+             <button type="submit"><i class="fa-sharp fa-solid fa-right-to-bracket"></i> Login</button>
           
       </div>
   

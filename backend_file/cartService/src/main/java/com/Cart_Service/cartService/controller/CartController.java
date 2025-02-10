@@ -1,6 +1,7 @@
 package com.Cart_Service.cartService.controller;
 
 import com.Cart_Service.cartService.Request.CartRequest;
+import com.Cart_Service.cartService.Request.ProductQtyIncreaseRequest;
 import com.Cart_Service.cartService.Request.ProductQtyReduceRequest;
 import com.Cart_Service.cartService.Request.ProductRemoveRequest;
 import com.Cart_Service.cartService.Response.CartDetailsResponse;
@@ -11,7 +12,6 @@ import com.Cart_Service.cartService.cover.ResponseHelper;
 import com.Cart_Service.cartService.cover.RudraCartResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,6 +36,16 @@ public class CartController {
     public RudraCartResponse<Boolean> decreaseQty(HttpServletRequest httpRequest, @RequestBody ProductQtyReduceRequest request) {
         String email = (String)httpRequest.getAttribute("attr1");
         boolean response = cartService.reduceProductQtyFromCart(request,email);
+        return ResponseHelper.createResponse(new RudraCartResponse<CartResponse>(), response,
+                Translator.toLocale("product.cart.item.removed.success", null),
+                Translator.toLocale("product.cart.item.removed.failed", null));
+    }
+
+    @PutMapping("/increase/product")
+    @SuppressWarnings("unchecked")
+    public RudraCartResponse<Boolean> increaseQty(HttpServletRequest httpRequest, @RequestBody ProductQtyIncreaseRequest request) {
+        String email = (String)httpRequest.getAttribute("attr1");
+        boolean response = cartService.increaseProductQtyFromCart(request,email);
         return ResponseHelper.createResponse(new RudraCartResponse<CartResponse>(), response,
                 Translator.toLocale("product.cart.item.removed.success", null),
                 Translator.toLocale("product.cart.item.removed.failed", null));

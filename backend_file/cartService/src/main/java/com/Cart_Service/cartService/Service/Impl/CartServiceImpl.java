@@ -7,6 +7,7 @@ import com.Cart_Service.cartService.Exception.ErrorCodes;
 import com.Cart_Service.cartService.Repository.CartRepo;
 import com.Cart_Service.cartService.Repository.UserRepo;
 import com.Cart_Service.cartService.Request.CartRequest;
+import com.Cart_Service.cartService.Request.ProductQtyIncreaseRequest;
 import com.Cart_Service.cartService.Request.ProductQtyReduceRequest;
 import com.Cart_Service.cartService.Request.ProductRemoveRequest;
 import com.Cart_Service.cartService.Response.CartDetailsResponse;
@@ -52,14 +53,18 @@ public class CartServiceImpl implements CartService {
             if (existingCart.isPresent()) {
                 cart = existingCart.get();
                 cart.setProQty(request.getProQty());
+                cart.setProductPrice(request.getProductPrice());
             } else {
                 // Create a new cart entry if it doesn't exist
                 cart = new Cart();
                 cart.setProductId(request.getProductId());
                 cart.setUserId(userId);
                 cart.setAddedOn(LocalDateTime.now());
-                cart.setProQty(1); // Initialize quantity for new cart entry
+                cart.setProQty(1);// Initialize quantity for new cart entry
+                cart.setProductPrice(request.getProductPrice());
             }
+            cart.setProductColor(request.getProductColor());
+            cart.setProductSize(request.getProductSize());
 
             // Save the updated or new cart
             cartRepo.save(cart);
@@ -98,6 +103,25 @@ public class CartServiceImpl implements CartService {
     }
 
 
+    @Transactional
+    @Override
+    public boolean increaseProductQtyFromCart(ProductQtyIncreaseRequest request, String email) {
+        String userId = userRepo.getUserByUserEmail(email).getId();
+        // Check if the cart already exists for the given userId
+        Optional<Cart> existingCart = cartRepo.
+                findByUserIdAndProductIdAndDeletedAndActive(userId, request.getProductId(), false, true);
+        if(existingCart.isPresent()){
+            Cart cart = existingCart.get();
+            if(cart.getProQty()!=0)
+                cart.setProQty(request.getProQty());
+            cartRepo.save(cart);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     @Override
     @Transactional
     public boolean removeProductFromCart(ProductRemoveRequest request, String email ) {
@@ -121,7 +145,7 @@ public class CartServiceImpl implements CartService {
             String userId = userRepo.getUserByUserEmail(userEmail).getId();
             if (userId != null) {
                 if (userRepo.findById(userId).isEmpty()){
-                    log.error("User Not Found with this ID");
+
                     throw new CartException(ErrorCodes.NOT_FOUND,
                             Translator.toLocale("user.not.found",null));
                 }
@@ -129,23 +153,40 @@ public class CartServiceImpl implements CartService {
             CartDetailsResponse response = new CartDetailsResponse();
             List<Object[]> results = cartRepo.findProductDetailsByUserId(userId);
 
-            Map<Integer, Integer> productDetails = new HashMap<>();
-
-            // Populate the map with results
-            for (Object[] result : results) {
-                Integer productId = (Integer) result[0];
-                Integer proQty = (Integer) result[1];
-                productDetails.put(productId, proQty);
-            }
+            Map<Integer, Map<String, Object>> productDetails = buildProductDetails(results);
 
             response.setUserId(userId);
             response.setProductDetails(productDetails);
             response.setNoOfProducts(results.size());
+
             return response;
         }catch (CartException ex){
             throw new CartException(ErrorCodes.NOT_FOUND,ex.getMessage());
         }
     }
+
+    private Map<Integer, Map<String, Object>> buildProductDetails(List<Object[]> results) {
+        Map<Integer, Map<String, Object>> productDetails = new HashMap<>();
+
+        for (Object[] result : results) {
+            Integer productId = (Integer) result[0];
+            Integer proQty = (Integer) result[1];
+            double productPrice = (double) result[2];
+            String productColor = (String) result[3];
+            String productSize = (String) result[4];
+
+            Map<String, Object> detailsMap = new HashMap<>();
+            detailsMap.put("quantity", proQty);
+            detailsMap.put("price", productPrice);
+            detailsMap.put("color", productColor);
+            detailsMap.put("size", productSize);
+
+            productDetails.put(productId, detailsMap);
+        }
+
+        return productDetails;
+    }
+
 
     @Override
     public Integer getNoOfProducts(String email) {

@@ -5,14 +5,17 @@
     gap: 20px;
     width: 100%;
     font-family: futur;
+    position: relative;
+    overflow-x: hidden;
   }
   
   .filterSection {
     flex: 0 0 300px;
     padding: 20px;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* border-radius: 8px; */
+    border-right: 1px solid #f3f3f3;
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
   }
 
   .productBoard{
@@ -75,14 +78,14 @@
   .price-input .field{
     display: flex;
     width: 100%;
-    height: 35px;
+    height: 30px;
     align-items: center;
   }
   .field input{
     width: 100%;
     height: 100%;
     outline: none;
-    font-size: 19px;
+    font-size: 15px;
     margin-left: 12px;
     border-radius: 5px;
     text-align: center;
@@ -156,13 +159,100 @@ img{
 
 
 
+.fashion-type{
+  width: 99%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0px;
+}
+
+.scrollerCont{
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  width: 98%;
+}
+
+.scrollerCont::-webkit-scrollbar{
+  width: 1px;
+}
+
+.scroller{
+  width:120%;
+  height: 30%;
+}
+
+
+/* selectionDevision */
+
+.selectionDiv{
+  width: 99%;
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+.section1, .section2{
+  width: 50%;
+  outline: 1px solid #e0e0e0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section1:hover, .section2:hover{
+  background-color: #f5f5f5;
+}
+
+
+.text{
+  width: 80%;
+  text-align: center;
+}
+
+.text p{
+  margin: 0;
+}
+
+.icon{
+  width: 10%;
+  margin-right: 10px;
+}
+
+.refineOption{
+  height: 100%;
+  width: 60%;
+  position: fixed;
+  top: 0;
+  background-color: rgb(255, 255, 255);
+  z-index: 99;
+  display: none;
+  box-shadow: 17px 3px 40px 4px rgba(0,0,0,0.25);
+  transition: ease-in-out .5s;
+}
+
+.btnClose{
+  position: absolute;
+  background-color: #4f237b;
+  color: white;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .cards{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap:20px;
-    
+    margin-top: 50px;
 }
 
 .like{
@@ -218,10 +308,10 @@ img{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;          /* Adjust as needed */
-    height: 30px;         /* Make height equal to width */
+    width: 30px;
+    height: 30px;
     background-color: white;
-    border-radius: 50%;   /* Ensures the container is circular */
+    border-radius: 50%;
     font-size: 13px;
 }
 
@@ -342,6 +432,12 @@ span{
     }
 }
 
+@media (max-width:600px) {
+  .fashion-type{
+    margin-top: -20%;
+  }
+}
+
 @media (max-width:475px) {
     img{
         width: 150px;
@@ -364,7 +460,7 @@ span{
 
     .productBoard{
         width: 100%;
-        margin: 100px auto;
+        margin: 50px auto;
     }
     img{
         width: 150px;

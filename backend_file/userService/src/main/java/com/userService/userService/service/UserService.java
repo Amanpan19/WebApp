@@ -11,8 +11,12 @@ import com.userService.userService.proxy.UserProxy;
 import com.userService.userService.repository.UserRepo;
 import org.json.simple.JSONObject;
 import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class UserService implements IUserService{
     private final RabbitTemplate rabbitTemplate;
     private final DirectExchange directExchange;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(UserRepo userRepo, UserProxy userProxy, RabbitTemplate rabbitTemplate, DirectExchange directExchange) {
@@ -36,10 +42,10 @@ public class UserService implements IUserService{
         this.directExchange = directExchange;
     }
 
-//    @RabbitListener(queues = "EmailQueue")
+    @RabbitListener(queues = "EmailQueue")
     @Override
     public User addUser(User user) throws UserAlreadyExist {
-        System.out.println("add user in service");
+        String hashPass = passwordEncoder.encode(user.getPassword());
         if(userRepo.existsById(user.getUserEmail())){
             System.out.println("User already exist!!"); // replaced by exception
             throw new UserAlreadyExist();
@@ -51,29 +57,21 @@ public class UserService implements IUserService{
         userDto.setPhoneNo(user.getPhoneNo());
         userDto.setImageName(user.getImageName());
         userDto.setRole(user.getRole());
+        userDto.setGender(user.getGender());
 
-        System.out.println(userDto);
+        user.setPassword(hashPass);
 
         userProxy.registerUser(userDto);
         User savedUser = userRepo.save(user);
 
-        String message = "Dear " + user.getUserName() + ",\n\n" +
-                "Thank you for joining CloudCart! We are delighted to have you.\n\n" +
-                user.getUserName()+ ", If you have any questions or need assistance, feel free to reach out to our support team.\n\n" +
-                "Once again, welcome to CloudCart!\n\n" +
-                "Best regards,\n" +
-                "Team CloudCart\n";
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("to",user.getUserEmail());
-        jsonObject.put("subject","Welcome to CloudCart!");
-        jsonObject.put("message",message);
+        jsonObject.put("subject","Welcome to Rivanaa!");
+        jsonObject.put("name",user.getUserName());
 
         EcommDTO ecommDTO = new EcommDTO();
         ecommDTO.setJsonObject(jsonObject);
         rabbitTemplate.convertAndSend(directExchange.getName(),"Cloud-Key",ecommDTO);
-
-        System.out.println("success :" + directExchange.getName());
 
         return savedUser;
     }
@@ -99,6 +97,11 @@ public class UserService implements IUserService{
         if(user.getPhoneNo() != 0){
             existingUser.setPhoneNo(user.getPhoneNo());
             userDto.setPhoneNo(user.getPhoneNo());
+        }
+
+        if(user.getGender() !=null){
+            existingUser.setGender(user.getGender());
+            userDto.setGender(user.getGender());
         }
         userProxy.updateUser(userDto,email);
         return userRepo.save(existingUser);

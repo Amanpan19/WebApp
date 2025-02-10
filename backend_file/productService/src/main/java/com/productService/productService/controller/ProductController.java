@@ -1,13 +1,16 @@
 package com.productService.productService.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.productService.productService.component.Translator;
+import com.productService.productService.cover.PaginatedResponse;
 import com.productService.productService.cover.ProductResponse;
 import com.productService.productService.cover.ResponseHelper;
 import com.productService.productService.domain.Product;
 import com.productService.productService.exception.ProductAlreadyExistsException;
 import com.productService.productService.exception.ProductNotFoundException;
+import com.productService.productService.response.ProTagResponse;
+import com.productService.productService.response.ProductCategoryResponse;
 import com.productService.productService.response.ProductTrending;
 import com.productService.productService.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +34,10 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addNewProduct")
-    public ResponseEntity<?> addProduct(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file,  @RequestParam("productData")String product) throws ProductAlreadyExistsException, IOException {
+    public ResponseEntity<?> addProduct(HttpServletRequest httpServletRequest,
+                                        @RequestParam("file") MultipartFile file,
+                                        @RequestParam("productData")String product)
+            throws ProductAlreadyExistsException, IOException {
         String role = (String)httpServletRequest.getAttribute("attr2");
 
         if ("adminRole".equals(role) || "supplier".equals(role)) {
@@ -94,6 +100,36 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductByCategory(category),HttpStatus.OK);
     }
 
+    @GetMapping("/getProduct/{category}")
+    @SuppressWarnings("unchecked")
+    public ProductResponse<List<ProductCategoryResponse>> getProductCategory(@PathVariable String category){
+        List<ProductCategoryResponse> response = productService.getProductDataByCategory(category);
+        return ResponseHelper.responseForGetOrFeign(new ProductResponse<List<ProductCategoryResponse>>(),response,
+                Translator.toLocale("fetched.product.category.success",null),
+                Translator.toLocale("fetched.product.category.failure",null));
+    }
+
+
+//    @GetMapping("/getProduct/byCategory")
+//    @SuppressWarnings("unchecked")
+//    public ProductResponse<PaginatedResponse<Product>> paginateProduct(
+//            @RequestParam(value = "pageNumber", required = true) int pageNumber,
+//            @RequestParam(value = "pageSize", required = true, defaultValue = "10")int pageSize,
+//            @RequestParam(value = "sortOrder", required = false, defaultValue = "true") boolean sortOrder,
+//            @RequestParam(value = "sortBy", required = false, defaultValue = "createdAt") String sortBy,
+//            @RequestParam(value = "category", required = true) String category,
+//            @RequestParam(value = "fashionType", required = false) String fashionType,
+//            @RequestParam(value = "clothType", required = false) String clothType,
+//            @RequestParam(value = "availableSize", required = false) List<String> availableSize,
+//            @RequestParam(value = "colorsAvail", required = false) List<String> colorsAvail,
+//            @RequestParam(value = "active", required = true) Boolean active) {
+//        PaginatedResponse<Product> response = productService.getPaginatedProducts(pageNumber,
+//                pageSize, sortOrder, sortBy, category, fashionType, clothType, availableSize,colorsAvail,active);
+//        return ResponseHelper.responseForGetOrFeign(new ProductResponse<PaginatedResponse<Product>>(),
+//                response, Translator.toLocale("paginated.product.success", null),
+//                Translator.toLocale("paginated.product.failed", null));
+//    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateProduct(HttpServletRequest httpServletRequest, @RequestBody Product product, @PathVariable int id) {
         if (httpServletRequest.getAttribute("attr2").equals("adminRole")) {
@@ -123,5 +159,37 @@ public class ProductController {
         }
 
         return ResponseEntity.ok().build();
+    }
+
+
+    @GetMapping("/getBy/clothType/category")
+    @SuppressWarnings("unchecked")
+    public ProductResponse<PaginatedResponse<Product>> getProductByCategoryAndClothType(
+            @RequestParam(value = "pageNumber", required = true) int pageNumber,
+            @RequestParam(value = "pageSize", required = true, defaultValue = "10")int pageSize,
+            @RequestParam(value = "sortOrder", required = false, defaultValue = "true") boolean sortOrder,
+            @RequestParam(value = "sortBy", required = false, defaultValue = "createdAt") String sortBy,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "clothType", required = false) String clothType,
+            @RequestParam(value = "active", required = true) boolean active) throws ProductNotFoundException {
+        PaginatedResponse<Product> response = productService.getProductByCategoryAndClothType(pageNumber,
+                pageSize, sortOrder, sortBy, category,clothType,active);
+        return ResponseHelper.createResponse(new ProductResponse<Product>(),response,
+                Translator.toLocale("product.fetched.success",null),
+                Translator.toLocale("product.fetched.failed",null));
+    }
+
+    // http://localhost:8082/api/v1/productService/getBy/proTag
+    @GetMapping("/getBy/proTag")
+    @SuppressWarnings("unchecked")
+    public ProductResponse<PaginatedResponse<ProductCategoryResponse>> getProductByProTags(
+            @RequestParam(value = "pageNumber", required = true) int pageNumber,
+            @RequestParam(value = "pageSize", required = true, defaultValue = "10")int pageSize,
+            @RequestParam(value = "proTag", required = false) String proTags){
+        PaginatedResponse<ProTagResponse> response = productService.getProductByProTags(pageNumber,
+                pageSize, proTags);
+        return ResponseHelper.createResponse(new ProductResponse<ProTagResponse>(),response,
+                Translator.toLocale("product.fetched.success",null),
+                Translator.toLocale("product.fetched.failed",null));
     }
 }

@@ -1,0 +1,192 @@
+.myWishList{
+    background: rgb(0, 22, 38);
+    padding: 70px 20px;
+}
+
+#paraWish{
+    color: white;
+    font-size: 55px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 55px;
+    margin-bottom: 0px;
+}
+
+.itemNo{
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.emptyCart{
+    text-align: center;
+    height: 90vh;
+    padding: 80px 0 80px;
+    line-height: 70px;
+    margin-bottom: 100px;
+}
+
+.emptyCart>img{
+    margin: 0 auto;
+    display: block;
+}
+
+#emptyPara{
+    font-size: 40px; 
+    font-weight: 600;
+}
+
+#backBtn{
+    background: rgb(19, 96, 185);
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.favSection{
+    height: auto;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.cards{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.letCard{
+    background-color: rgb(226, 226, 226);
+    align-items: center;
+    border: 1px solid rgb(221, 221, 221);
+    cursor: pointer;
+    position: relative;
+    width: 220px;
+}
+
+#close{
+    position: absolute;
+    right: 12px; top: 10px;
+    font-size: 26px;color: rgba(0, 0, 0, 0.36);
+}
+
+.proImg{
+    width: 220px;
+    text-align: center;
+}
+.proImg img{
+    width: 220px;
+    height: 290px;
+}
+
+.productName{
+    padding: 7px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;flex-direction: column;
+}
+
+.proPrice{
+    background-color: white;
+    font-family: futur;
+    display: flex;
+    padding: 3px;
+}
+
+.proPrice span{
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.productName span{
+    font-family: futur;
+    font-size: 17px;
+    text-align: center;
+}
+
+.moveToCart{
+    background-color: white;
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.moveToCart a{
+    text-decoration: none;
+    color: rgb(255, 0, 102);
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+@media (max-width:640px) {
+
+    .myWishList{
+        padding: 30px 20px;
+    }
+
+    .favSection {
+        /* flex-direction: column; */
+        align-items: center;
+        margin-top: 20px; /* Reduce margin for smaller screens */
+    }
+
+    .cards {
+        /* flex-direction: column; */
+        align-items: center; /* Center-align the cards */
+        gap: 10px; /* Reduce the gap between cards */
+    }
+
+    .letCard {
+        width: 90%; /* Reduce the card width */
+        max-width: 190px; /* Ensure a maximum width for better readability */
+    }
+
+    .proImg{
+        width: 100%;
+        /* max-width: 200px; */
+    }
+
+
+    .proImg img{
+        width: 100%;
+        height: 290px;
+    }
+
+    .productName span,
+    .proPrice span,
+    .moveToCart a {
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .proPrice {
+        justify-content: center; /* Center-align the price */
+        padding: 5px; /* Adjust padding */
+    }
+
+    .moveToCart a {
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    #close {
+        font-size: 20px; /* Adjust icon size */
+        top: 8px; 
+        right: 8px;
+    }
+    #emptyPara{
+        font-size: 30px;
+        line-height: 50px;
+    }
+}
+
+@media (max-width:619px) {
+    .letCard{
+        max-width: 45%;
+    }
+}

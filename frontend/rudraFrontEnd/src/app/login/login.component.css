@@ -11,7 +11,7 @@
 h2{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    background:linear-gradient(135deg,rgb(251, 255, 6),rgb(244, 26, 87));
+    background:linear-gradient(135deg,rgb(31, 71, 122),rgb(45, 79, 109));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -29,7 +29,7 @@ mat-dialog-content{
     position: absolute;
     top: 10px;right: 10px;
     border-radius: 50%;
-    background-color: rgb(247, 34, 73);
+    background-color:orangered;
     display: flex;justify-content: center;align-items: center;
     text-decoration: none;
     cursor: pointer;
@@ -52,7 +52,7 @@ input:focus ~ label,
 input:valid ~ label{
     transform: translateY(-15px);
     font-size:13px;
-    color: rgb(19, 79, 144);
+    color: rgb(0, 24, 42);
     
 }
 
@@ -147,7 +147,7 @@ form #regi{
 @media (max-width:420px) {
     form{
         padding: 20px;
-        width: 70vw;
+        width: 75vw;
         border-radius: 10px;
         box-shadow: none;
         background-color: white;

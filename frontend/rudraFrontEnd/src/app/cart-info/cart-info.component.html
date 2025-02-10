@@ -1,44 +1,129 @@
-<div class="cartBoard">
-    <div class="cards" *ngIf="cartDetailsLoaded">
-        <div class="productInCart" *ngFor="let product of cartProductDetails">
-            <div class="productCard">
+<div class="myCart">
+    <p id="paraCart">Cart</p>
+</div>
 
-            
-                <mat-icon class="deleteButton" (click)="removeProduct(product)">delete</mat-icon>
-                
+<div class="main">
+    <div class="mainProSection"  *ngIf="cartProductDetails.length !== 0">
 
-                <div class="productImage">
-                    <img [src]="product.data.imageUrl" alt="{{ product.data.productName }}" class="img-responsive" />
-                </div>
+        <div class="mainPro">
+            <div class="mainCard" *ngIf="cartDetailsLoaded">
+                <p>My Cart : {{noOfItems}}</p>
+                <div class="productInCart" *ngFor="let product of cartProductDetails">
+                    <div class="cards">
+                        <div class="productImage" (click)="getProduct(product.data.productId)">
+                            <img [src]="product.data.imageUrl" alt="{{ product.data.productName }}" class="img-responsive" />
+                        </div>
+                        <div class="productDetails">
+                            <p class="productName">{{limitWords(product.data.productName)}}</p>
+                            <p class="productPrice">Price: ₹{{ product.data.productPrice }}</p>
+                            <p class="availability" [ngClass]="product.data.quantity > 0 ? 'inStock' : 'outOfStock'">
+                                {{ product.data.quantity > 0 ? 'In Stock' : 'Out of Stock' }}
+                            </p>
+                            <p class="sizeSelected">Size : {{product.data.productSize}}</p>
+                            <div class="colBox" [style.backgroundColor]="product.data.productColor" title="{{ product.data.productColor }}"></div>
+                            
+                        </div>
 
-                <div class="productDetails">
-                    <h3 class="productName">{{ product.data.productName }}</h3>
-                    <p class="productPrice">Price: ₹{{ product.data.productPrice }}</p>
-                    <!-- <p class="productDescription">{{ product.data.description }}</p> -->
-                    <p class="availability" [ngClass]="product.data.quantity > 0 ? 'inStock' : 'outOfStock'">
-                        {{ product.data.quantity > 0 ? 'In Stock' : 'Out of Stock' }}
-                    </p>
-                    <div class="quantityControl">
-                        <button (click)="decreaseQuantity(product)" [disabled]="product.data.proQty === 1">-</button>
-                        <span>{{ product.data.proQty }}</span>
-                        <button (click)="increaseQuantity(product)">+</button>
+                        <a class="moveToWishlist" (click)="moveToFavSection(product.data.productId)">
+                            <i class="fa-light fa-heart"></i>
+                            <span>Move to wishlist</span>
+                        </a>
+                        <i class="fa-light fa-trash-can" id="deleteButton" (click)="removeProduct(product.data.productId)"></i>
+                        <div class="quantityControl">
+                            <button (click)="decreaseQuantity(product)" [disabled]="product.data.proQty === 1">-</button>
+                            <span>{{ product.data.proQty }}</span>
+                            <button (click)="increaseQuantity(product)">+</button>
+                        </div>
                     </div>
                 </div>
+                <!-- <div class="loading">
+                    <img src="../../assets/Pinwheel.gif" alt="">
+                </div> -->
 
-            
-                <div class="productActions">
-
-                    <div class="productActions">
-                        <button class="buyButton" [disabled]="product.data.quantity === 0" (click)="buyProduct(product)">Buy Now</button>
-                    </div>
-                    
+                <div class="addFromWishlist">
+                    <a routerLink="/fav">
+                        <i class="fa-light fa-bookmark"></i>
+                        <span>Add more from wishlist</span>
+                    </a>
                 </div>
             </div>
         </div>
+        <div class="coupSection">
+            <div class="coupon">
+                <p style="font-size: 13px; font-weight: 500;">Coupon</p>
+
+                <div class="viewCoupon">
+                    <div class="cop">
+                        <img src="https://pictures.kartmax.in/cdn/images-kartmax/coupon_percentage.svg" alt="" width="20px">
+                        <span>Apply coupon</span>
+                    </div>
+            
+                    <a (click)="openDialog()">view all</a>
+                </div>
+
+                <p class="checkLogin" *ngIf="!checkLogin" style="font-size: 13px; margin-top: 10px;">
+                    <a (click)="navigateUser()" style="color: black; cursor: pointer;"> <u>Login</u></a>
+                     to see best coupons for you
+                </p>
+
+                <hr>
+
+                <div class="priceDetails">
+                    <table class="price-details">
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="tag">Price Details (1 item)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total MRP</td>
+                                <td class="val">Rs {{totalMRP}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Discount on MRP</td>
+                                <td class="val">Rs {{totalDiscount}}</td>
+                            </tr>
+                            <tr>
+                                <td>Convenience Fee <span class="convenience-fee">Know More</span></td>
+                                <td class="val">Rs {{totalConvenienceFee}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <table style="margin-top: -20px;">
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: 600;">Total Price</td>
+                                <td class="val">Rs {{totalPrice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="proceed">
+                    <a (click)="clickToProceed()" class="checkOut">Proceed to checkout</a>
+                </div>
+                
+            </div>
+            
+        </div>
+
     </div>
 
     <div class="emptyCart" *ngIf="cartProductDetails.length === 0">
-        <p>Your cart is empty. Add some products!</p>
+
+        <div class="addFromWishlist">
+            <a routerLink="/fav" style="width: 90%; margin: 20px auto;">
+                <i class="fa-light fa-bookmark"></i>
+                <span>Add more from wishlist</span>
+            </a>
+        </div>
+
+        <p id="emptyPara">This cart is empty.</p>
         <img src="../../assets/empty.png" alt="empty cart" style="display: flex;justify-content: center; align-items: center;">
     </div>
+
 </div>

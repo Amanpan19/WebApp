@@ -1,19 +1,47 @@
+.addProductPage{
+  margin-top: 130px;
+  margin: 0 auto;
+  height: auto;
+}
+
+.logoInfo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logoInfo img{
+  width: 90px;
+}
+
+.logoInfo .tag{
+  height: 50px;
+  line-height: 55px;
+}
+
+.logoInfo .tag span{
+  font-family: gears;
+  font-size: 28px;
+}
+
+
 .productPage {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin-top: 80px;
 }
 
 form {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    max-width: 800px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); */
+    max-width: 1100px;
     width: 100%;
+    height: 100%;
 }
 
 .form-row {
@@ -25,9 +53,59 @@ form {
     flex: 1;
 }
 
+form .types {
+    display: flex;
+    width: 80%;
+    margin: 15px 0;
+    justify-content: space-between;
+  }
+  form .types label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  form .types label .dot,
+  form .types label .check{
+    height: 15px;
+    width: 15px;
+    /* border-radius: 50%; */
+    margin-right: 10px;
+    background: #dedede;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  #dot-1:checked~.types label .one,
+  #dot-2:checked~.types label .two,
+  #dot-3:checked~.types label .three,
+  #dot-4:checked~.types label .four,
+  #dot-5:checked~.types label .five,
+  #check-1:checked~.types label .one,
+  #check-2:checked~.types label .two {
+    background: #65a3ff;
+    border-color: #efeded;
+  }
+
+  form input[type="checkbox"] {
+    display: none;
+  }
+
+  form input[type="radio"] {
+    display: none;
+  }
+
+legend {
+	font-weight: 700;
+}
+
 label {
     display: block;
     margin-bottom: 8px;
+    font-family: futur;
+}
+
+.size-title, .return-title{
+  font-family: futur;
 }
 
 input, select, textarea {
@@ -36,8 +114,9 @@ input, select, textarea {
     margin-bottom: 16px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: futur;
 }
 
 .btn{
@@ -64,4 +143,53 @@ button:hover {
     font-size: 13px;
     color: red;
     margin-top: -8px;
+}
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.chip {
+  background-color: #ff004c;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.close {
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cont{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.textCont{
+  width: 90%;
+}
+
+/* #addChip{
+  position: absolute;
+  right: 12px;top:31px;
+} */
+
+@media (max-width:570px) {
+  .form-row{
+    display: block;
+  }
 }

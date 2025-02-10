@@ -22,7 +22,7 @@ public interface CartRepo extends JpaRepository<Cart, Long> {
     @Query(value = "SELECT product_id,pro_qty FROM Cart WHERE user_id = :user_id And deleted=0 And active=1", nativeQuery = true)
     List<Integer> findProductIdByUserId(@Param("user_id") String user_id);
 
-    @Query(value = "SELECT product_id, pro_qty FROM cart WHERE user_id = :userId AND deleted = false AND active = true",nativeQuery = true)
+    @Query(value = "SELECT product_id, pro_qty, product_price, product_color, product_size FROM cart WHERE user_id = :userId AND deleted = false AND active = true",nativeQuery = true)
     List<Object[]> findProductDetailsByUserId(@Param("userId") String userId);
 
     @Modifying

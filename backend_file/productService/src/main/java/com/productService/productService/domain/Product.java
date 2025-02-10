@@ -7,12 +7,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Document
-public class Product {
+public class Product extends BaseEntity {
     @Id
     private String id;
     private int productId;
@@ -27,4 +28,6 @@ public class Product {
     private String description;
     private int views;
     private int dayViews;
+    private List<String>productTags;
+    private ProductInfo productDetails;
 }

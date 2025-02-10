@@ -28,5 +28,6 @@ public class User {
     private byte[] userImage;
     private String imageName;
     private List<FavItems> favItems;
+    private String gender="";
 
 }

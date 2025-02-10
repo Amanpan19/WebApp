@@ -1,186 +1,308 @@
-.cartBoard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    margin-top: 110px;
+.myCart{
+    background: rgb(0, 22, 38);
+    padding: 70px 0px;
 }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+#paraCart{
+    color: white;
+    font-size: 50px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 55px;
+    margin-bottom: 0px;
+}
+
+.main{
     width: 100%;
-    
+    height: auto;
+}
+
+.mainProSection{
+    display: flex;
+    flex-direction: row;
+}
+
+.mainPro{
+    width: 60%;
+}
+
+.mainCard{
+    width: 90%;
+    margin: 10px auto;
+    gap: 20px;
+}
+
+.cards{
+    display: flex;
+    position: relative;
+}
+
+.productInCart{
+    margin: 10px auto;
+    border: 1px solid rgb(234, 234, 234);
+}
+
+.productImage{
+    width: 30%;
+    max-width: 150px;
+    overflow: hidden;
+    height: 180px;
+    cursor: pointer;
+}
+
+.productImage img{
+    width: 150px;
+    padding: 10px;
+    height: 180px;
+}
+
+.productDetails{
+    width: 70%;
+}
+
+.productDetails>p{
+    margin: 10px;
+    font-size: 14px;
+}
+
+.productName{
+    font-size: 14px;
+}
+
+.quantityControl{
+    position: absolute;
+    right: 1px;
+    top: 1px;
+}
+
+.quantityControl button{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    outline: none;border: none;
+}
+
+.moveToWishlist{
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    gap: 5px;
+    color: black;
+    position: absolute;
+    right: 40px;
+    bottom: 10px;
+    line-height: 17px;
+    cursor: pointer;
+}
+
+.moveToWishlist span{
+    font-size: 12px;
+}
+
+.moveToWishlist span:hover{
+    text-decoration: underline;
+    color: #ff136e;
+}
+
+#deleteButton{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.addFromWishlist{
+    width: 100%;
+}
+
+.addFromWishlist a{
+    padding: 10px 20px;
+    border: 1px solid rgb(222, 222, 222);
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+    color: rgb(74, 74, 74);
+}
+
+.addFromWishlist i{
+    margin-top: 4px;
+}
+
+.addFromWishlist span{
+    font-size: 12px;
+}
+
+.coupSection{
+    width: 40%;
+    height: auto;
+    background: #f4f4f4;
+    border-left: 1px solid rgb(230, 230, 230);
+}
+
+.coupon{
+    width: 80%;
+    margin: 20px auto;
+}
+
+.viewCoupon{
+    width:100%;
+    border-radius: 4px;
+    padding: 5px 20px;
+    border: 1px dashed black;
+    display: flex;
+    background-color: white;
+    font-size: 14px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.cop{
+    display: flex;
+    flex-direction: row;
+    line-height: 45px;
+    gap: 6px;
+}
+
+
+.viewCoupon>span{
+    line-height: 45px;
+}
+
+.viewCoupon a{
+    line-height: 45px;
+    position: relative;
+    cursor: pointer;
+}
+
+hr{
+    width: 100%;
+    padding: 10px 2px;
+    color: #cecece;
+    margin: 0 auto;
+}
+
+table{
+    width: 100%;
+}
+
+thead .tag{
+    font-size: 13px;
+    font-weight: 500;
+    color: rgb(60, 60, 60);
+}
+
+td{
+    font-size: 13px;
+    padding: 10px 0;
+}
+
+.val{
+    text-align: right;
+}
+
+.proceed{
+    display: flex;
+    margin: 30px 0 100px;
+}
+
+.checkOut{
+    width: 100%;
+    border-radius: 4px;
+    padding: 10px 80px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.colBox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    margin-top: -5px;
+    margin-left: 10px;
+    border-radius: 50%;
 }
 
 .emptyCart{
+    padding: 20px 0px;
     text-align: center;
 }
 
-.productInCart {
-    flex: 1 1 calc(50% - 20px); /* 50% width for 2 cards per row */
-    box-sizing: border-box;
-}
-
-.productCard {
+.emptyCart>img{
+    margin: 0 auto;
+    display: block;
     position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 250px; /* Ensures all cards are of equal size */
-    transition: transform 0.3s ease; /* Smooth transition on hover */
+    top:0;
+    bottom: 0;
 }
 
-.productImage {
-  max-width: 10rem;
-  /* overflow: hidden; */
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+#emptyPara{
+    font-size: 40px; 
+    font-weight: 600;
+    margin: 40px 0px 10px;
 }
 
-.productImage img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.productDetails {
-    flex: 2;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.productDetails h3 {
-    margin: 0 0 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    font-family: futur;
-}
-
-.productDetails p {
-    margin: 5px 0;
-}
-
-.productActions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: auto;
-}
-
-
-.quantityControl {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1; /* Ensures the quantity control is on the left */
-    margin-top: 30px;
-}
-
-.quantityControl button {
-    width: 30px;
-    height: 30px;
-    font-size: 20px;
-    text-align: center;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.quantityControl button:hover {
-    background-color: #ddd;
-}
-
-.buyButton {
-    background-color: #ff7f50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.buyButton:hover {
-    background-color: #ff4500; /* Darker shade on hover */
-    transform: scale(1.1); /* Slight zoom on hover */
-}
-
-.buyButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.inStock {
-    color: green;
-    font-weight: bold;
-}
-
-.outOfStock {
-    color: red;
-    font-weight: bold;
-}
-
-.deleteButton {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border: none;
-    cursor: pointer;
-    color: rgb(87, 87, 87);
-}
-
-.deleteButton img {
-    width: 24px;
-    height: 24px;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .cartBoard {
-        margin-top: 120px;
-    }
-    .productInCart {
-        flex: 1 1 100%;
-    }
-
-    .productCard {
+@media (max-width:762px) {
+    .mainProSection{
+        display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        height: auto; /* Adjusts height for smaller screens */
-    }
+    }   
 
-    .productImage {
-        max-width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .productDetails {
-        padding-left: 0;
-        margin-top: 20px;
-    }
-
-    .buyButton {
+    .mainPro{
         width: 100%;
     }
 
-    .emptyCart{
-        text-align: center;
+    .coupSection{
+        width: 100%;
+    }
+
+    .checkOut{
+        padding: 10px 50px;
+    }
+
+    #emptyPara{
+        font-size: 28px;
+        line-height: 50px;
+    }
+    
+}
+
+@media (max-width:580px) {
+    .myCart{
+        padding: 30px 0px;
+    }
+
+    .productImage{
+        width: 30%;
+        max-width: 120px;
+        overflow: hidden;
+        height: 140px;
+    }
+    
+    .productImage img{
+        width: 100%;
+        padding: 10px;
+        height: 140px;
+    }
+
+    .productDetails>p{
+        margin: 5px;
+    }
+
+    .moveToWishlist i{
+        cursor: pointer;
+    }
+
+    .moveToWishlist span{
+        display: none;
+    }
+}
+
+@media (max-width:450px) {
+    .quantityControl button{
+        width: 20px;
+        height: 25px;
     }
 }

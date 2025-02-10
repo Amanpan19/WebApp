@@ -1,0 +1,63 @@
+<div class="selectDialog">
+    <div class="content">
+        <mat-dialog-content>
+            <div class="info">
+                <div class="productInfo">
+                    <div class="imgContainer">
+                        <img [src]="proImg" alt="">
+                    </div>
+                    <div class="productDetails">
+                        <p>{{productName}}</p>
+                        <span>Rs. {{proPrice}}</span>
+                    </div>
+                </div>
+
+                <div class="close">
+                    <a (click)="clear()">
+                        <i class="fa-light fa-xmark"></i>
+                    </a>
+                </div>
+
+                <hr>
+                <div class="selectSize">
+                    <p> Select Size</p>
+
+                    <div class="availSize">
+                        <div class="size" *ngFor="let size of sizeAvail">
+                          <input type="radio" [value]="size" id="{{size}}" name="size" (change)="onSizeSelected(size)"/>
+                          <label for="{{size}}">{{ size }}</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="selectColor">
+                    <p>Select Color</p>
+                    <div class="colorsContainer">
+                        <div class="colorBox" *ngFor="let color of colorCodes">
+                            <input type="radio" [value]="color" [id]="color" name="color"
+                              (change)="onColorSelected(color)"
+                            />
+                            <label [for]="color">
+                              <div class="col" [style.backgroundColor]="color" title="{{ color }}"></div>
+                            </label>
+                          </div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="button">
+                    <a (click)="moveToCart()" class="btn"
+                    [class.disabled]="!isSelectedSize || !isSelectedColor" 
+                    [attr.disabled]="!isSelectedSize || !isSelectedColor ? true : null">
+                     Done </a>
+                </div>
+
+            </div>
+
+            
+        </mat-dialog-content>
+    </div>
+</div>

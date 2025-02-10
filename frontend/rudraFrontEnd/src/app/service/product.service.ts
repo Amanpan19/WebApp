@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   public productId:number=0;
-  public fashionType:string='';
+  public fashionType:string='mens';
 
   productUrl:string='http://localhost:9000/api/v1/productService';
 
@@ -47,9 +47,17 @@ export class ProductService {
   }
 
   getProductByCategory(category:string){
-    console.log(category);
     
     return this.httpClient.get(`${this.productUrl}/getByCategory/${category}`)
+  }
+
+  getProductDataByCategory(category:string){
+    
+    return this.httpClient.get(`${this.productUrl}/getProduct/${category}`)
+  }
+
+  getProductByTag(proTag:string, pageNumber:number, pageSize:number){
+    return this.httpClient.get(`${this.productUrl}/getBy/proTag?pageNumber=${pageNumber}&pageSize=${pageSize}&proTag=${proTag}`)
   }
 
   convertImageData(products: any[]): void {

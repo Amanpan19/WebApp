@@ -9,6 +9,7 @@ import com.userService.userService.exception.UserNotFoundException;
 import com.userService.userService.service.ISupplierService;
 import com.userService.userService.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/userService")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -39,7 +41,7 @@ public class UserController {
         System.out.println("request reached to register");
         User user1 = new ObjectMapper().readValue(user, User.class);
         user1.setUserImage(file.getBytes());
-        System.out.println(user);
+        log.info(user);
         String fileName = file.getOriginalFilename();
         String newFileName = FilenameUtils.getBaseName(fileName)+"_"+System.currentTimeMillis()+"."+FilenameUtils.getExtension(fileName);
         user1.setImageName(newFileName);
@@ -60,8 +62,7 @@ public class UserController {
             String newFileName = FilenameUtils.getBaseName(fileName)+"_"+System.currentTimeMillis()+"."+FilenameUtils.getExtension(fileName);
             user1.setImageName(newFileName);
         }
-        System.out.println("User Email : "+user1.getUserEmail()+", user image_Name : "+user1.getImageName()+", phone-No : "+user1.getPhoneNo()+
-        ", ");
+        log.info("User Email : {}, user image_Name : {}, phone-No : {}, user_gender : {}", user1.getUserEmail(), user1.getImageName(), user1.getPhoneNo(), user1.getGender());
         return new ResponseEntity<>(userService.updateUser(email,user1),HttpStatus.OK);
     }
 
@@ -69,7 +70,7 @@ public class UserController {
     public ResponseEntity<?>addFavItem(HttpServletRequest request, FavItems favItems){
         String email = (String)request.getAttribute("attr1");
         if(email.isEmpty()){
-            System.out.println("Email is empty");
+            log.info("Email is empty");
             return new ResponseEntity<>("No Value we are getting",HttpStatus.BAD_REQUEST);
         }
         else {

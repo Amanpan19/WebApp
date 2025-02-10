@@ -2,6 +2,15 @@ html {
     scroll-behavior: smooth;
 }
 
+.banner{
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.banner #bannerImg{
+    width: 100%;
+}
+
 /* .fashion-type{
     position: relative;
     z-index: 999;
@@ -10,6 +19,14 @@ html {
 .fashion-for{
     position: relative;
     z-index: 999;
+}
+
+.carousel-inner{
+    background-color: rgb(243, 243, 243);
+}
+
+.container{
+    height: 730px;
 }
 
 .newsFront{
@@ -72,7 +89,7 @@ button{
 }
 
 button:hover{
-    background: rgb(233, 51, 115);
+    background:linear-gradient(to right, rgb(36, 33, 34),rgb(91, 91, 91));
 }
 
 img{
@@ -107,16 +124,13 @@ img{
     font-family: futur;
 }
 
-.products{
-    margin-top: 50px;
-}
-
 p{
     text-align: center;
 }
 @media (max-width:1200px) {
     .secondCol .tag{
         font-size: 30px;
+    
     }
     h4{
         font-size: 30px;
@@ -135,20 +149,20 @@ p{
         font-size:30px;
         line-height:40px;
     }
-    .details{
-        margin-top: 10%;
-    }
 }
 
 @media (max-width:800px) {
    
     .details{
-        margin-top: 10%;
+        margin-top: 5%;
     }
     
 }
 
-@media (max-width:767px) {
+@media (max-width:768px) {
+    .container{
+        height: auto;
+    }
 
     .fashion-type{
         display: none;

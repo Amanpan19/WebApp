@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: gears;
+    src: url("../assets/font/GearsOfPeace.ttf");
+}
+
+@font-face {
     font-family: lazyDog;
     src: url("../assets/font/lazy_dog.ttf");
 }
@@ -17,7 +22,7 @@
 @font-face {
     font-family: francois;
     src: url("../assets/font/francois-one.regular.ttf");
-    font-weight: 600;
+    font-weight: 500;
 }
 
 @font-face {

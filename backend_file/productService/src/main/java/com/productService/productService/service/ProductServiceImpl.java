@@ -1,23 +1,24 @@
 package com.productService.productService.service;
 
 
+import com.productService.productService.cover.PaginatedResponse;
 import com.productService.productService.domain.Product;
 import com.productService.productService.exception.ProductAlreadyExistsException;
 import com.productService.productService.exception.ProductNotFoundException;
 import com.productService.productService.repository.ProductRepository;
+import com.productService.productService.response.ProTagResponse;
+import com.productService.productService.response.ProductCategoryResponse;
 import com.productService.productService.response.ProductTrending;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() throws ProductNotFoundException {
-        List<Product> productList = this.productRepository.findAll();
+        List<Product> productList = this.productRepository.findByActiveTrueAndDeletedFalse();
         if (productList.isEmpty()) {
             throw new ProductNotFoundException("No Product Found");
         }
@@ -73,9 +74,39 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public PaginatedResponse<Product> getProductByCategoryAndClothType(int pageNumber, int pageSize, boolean sortOrder, String sortBy, String category, String clothType, boolean active) {
+
+        long totalElement = 0;
+        long totalPage = 0;
+
+        if (sortBy == null || sortBy.trim().isEmpty()) {
+            sortBy = "productPrice";
+        }
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize,
+                Sort.by(sortOrder ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
+
+        // Handle empty filters gracefully
+        Page<Product> productsPage = productRepository
+                    .findByCategoryAndProductDetails_clothType
+                            (category, clothType, pageable);
+
+
+        System.out.println("product_page : "+productsPage);
+
+        totalElement = productsPage.getTotalElements();
+        totalPage = productsPage.getTotalPages();
+
+        // Handle potential empty content
+        List<Product> response = productsPage.isEmpty() ? Collections.emptyList() : productsPage.getContent().stream().toList();
+
+        return new PaginatedResponse<>(totalElement, totalPage, pageSize, (pageNumber + 1), response.size(), response);
+    }
+
+    @Override
     public List<Product> getProductByCategory(String category){
         List<Product>proByCategory=new ArrayList<>();
-        List<Product> productList = productRepository.findAll();
+        List<Product> productList = productRepository.findByActiveTrueAndDeletedFalse();
         for(Product product:productList){
             if(category.equals(product.getCategory())){
                 proByCategory.add(product);
@@ -83,6 +114,55 @@ public class ProductServiceImpl implements ProductService {
         }
         return proByCategory;
     }
+
+    @Override
+    public List<ProductCategoryResponse> getProductDataByCategory(String category){
+        List<ProductCategoryResponse>proByCategory;
+        List<Product> productList = productRepository.findByActiveTrueAndDeletedFalse();
+        proByCategory = productList.stream()
+                .filter(product -> category.equals(product.getCategory())) // Filter by category
+                .map(product -> modelMapper.map(product, ProductCategoryResponse.class)) // Map using ModelMapper
+                .collect(Collectors.toList());
+        return proByCategory;
+    }
+
+//    @Override
+//    public PaginatedResponse<Product> getPaginatedProducts(int pageNumber, int pageSize, boolean sortOrder, String sortBy, String category, String fashionType, String clothType, List<String> availableSize, List<String> colorsAvail, Boolean active) {
+//
+//        long totalElement = 0;
+//        long totalPage = 0;
+//
+//        if (sortBy == null || sortBy.trim().isEmpty()) {
+//            sortBy = "productPrice";
+//        }
+//
+//        Pageable pageable = PageRequest.of(pageNumber, pageSize,
+//                Sort.by(sortOrder ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
+//
+//        // Handle empty filters gracefully
+//        Page<Product> productsPage;
+//        if (category == null && fashionType == null && clothType == null && availableSize == null && colorsAvail == null && active == null) {
+//            productsPage = productRepository.findAll(pageable); // Retrieve all products if no filters are provided
+//        } else {
+//            productsPage = productRepository
+//                    .findDetailsByFilters
+//                            (category, fashionType, clothType, availableSize, colorsAvail, pageable);
+//        }
+//
+//        System.out.println("product_page : "+productsPage);
+//
+//        totalElement = productsPage.getTotalElements();
+//        totalPage = productsPage.getTotalPages();
+//
+//        // Handle potential empty content
+//        List<Product> response = productsPage.isEmpty() ? Collections.emptyList() : productsPage.getContent().stream().toList();
+//
+//        return new PaginatedResponse<>(totalElement, totalPage, pageSize, (pageNumber + 1), response.size(), response);
+//    }
+
+
+
+
 
     @Transactional
     @Override
@@ -175,6 +255,26 @@ public class ProductServiceImpl implements ProductService {
         }else {
             throw new ProductNotFoundException("Product Not Found for Id :"+productId);
         }
+    }
+
+    @Override
+    public PaginatedResponse<ProTagResponse> getProductByProTags(int pageNum, int pageSize, String proTag) {
+
+        long totalElement = 0;
+        long totalPage = 0;
+
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+
+        Page<Product> productsPage = productRepository.findByProTags(proTag,pageable);
+
+        totalElement = productsPage.getTotalElements();
+        totalPage = productsPage.getTotalPages();
+
+        List<ProTagResponse> response = productsPage.map(product -> modelMapper
+                .map(product, ProTagResponse.class)).stream().toList();
+
+
+        return new PaginatedResponse<>(totalElement, totalPage, pageSize, (pageNum + 1), response.size(), response);
     }
 
     @Scheduled(cron = "0 0 0 * * ?")  // This cron expression means midnight every day

@@ -13,18 +13,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Entity
-public class User {
-    @Id
-    private String id;
+public class User extends BaseEntity{
+
     private String userEmail;
     private String userName;
     private String password;
     private String role;
     private long phoneNo;
     private String imageName;
+    private String gender;
 
-    @PrePersist
-    private void generateId() {
-        this.id = UUID.randomUUID().toString(); // Generate a new UUID when the entity is persisted
-    }
 }
