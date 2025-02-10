@@ -8,11 +8,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../service/cart.service';
 import { cartRequest } from '../model/cartRequest';
 import { LoaderComponent } from '../loader/loader.component';
+import { SelectOptionDialogComponent } from '../select-option-dialog/select-option-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MainProDashComponent } from '../main-pro-dash/main-pro-dash.component';
 
 @Component({
   selector: 'app-product-dash',
   standalone: true,
-  imports: [CommonModule,LoaderComponent],
+  imports: [CommonModule,LoaderComponent,MainProDashComponent],
   templateUrl: './product-dash.component.html',
   styleUrl: './product-dash.component.css'
 })
@@ -23,6 +26,8 @@ export class ProductDashComponent implements OnInit {
   productsLoaded:boolean=false;
   isButtonClicked:boolean = false;
   isLoading:boolean=false;
+  selectedSize: string = '';
+  selectedColor: string = '';
 
   @ViewChildren('productCard') productCards!: QueryList<ElementRef>;
 
@@ -32,7 +37,9 @@ export class ProductDashComponent implements OnInit {
     private favSer:FavouriteService,
     private _snackBar:MatSnackBar, 
     private cartSer:CartService,
-    private sanitizer:DomSanitizer){}
+    private proSer:ProductService,
+    private dialog:MatDialog
+  ){}
 
   ngOnInit(): void {
    this.fetchProducts();
@@ -101,28 +108,38 @@ export class ProductDashComponent implements OnInit {
     });
   }
 
-  addToCart(productId:number){
-    const request: cartRequest = {
-      productId: productId,
-      proQty: 1
-    };
+  // addToCart(productId:number){
+  //   const request: cartRequest = {
+  //     productId: productId,
+  //     proQty: 1,
+  //     productColor: this.selectedSize,
+  //     productSize: this.selectedColor,
+  //     productPrice : this.proPrice
+  //   };
 
-     this.cartSer.addProductInCart(request).subscribe({
-      next:data=>{
-        this.cartSer.getNoOfProductsInCart().subscribe({
-          next: (data: any) => {
-            const updatedCount = data.data;
-            this.cartSer.notifyCartCountChange(updatedCount);
-          }
-        })
-        this._snackBar.open('Product added to Cart', 'success', {
-          duration: 2000,
-          panelClass: ['mat-toolbar', 'mat-primary'],
-          horizontalPosition: 'left',
-          verticalPosition: 'top' 
+  //    this.cartSer.addProductInCart(request).subscribe({
+  //     next:data=>{
+  //       this.cartSer.getNoOfProductsInCart().subscribe({
+  //         next: (data: any) => {
+  //           const updatedCount = data.data;
+  //           this.cartSer.notifyCartCountChange(updatedCount);
+  //         }
+  //       })
+  //       this._snackBar.open('Product added to Cart', 'success', {
+  //         duration: 2000,
+  //         panelClass: ['mat-toolbar', 'mat-primary'],
+  //         horizontalPosition: 'left',
+  //         verticalPosition: 'top' 
+  //       });
+  //     }
+  //    })
+  // }
+
+  navigateToSelect(prodId:number){
+      this.proSer.productId=prodId;
+        const dialogRef = this.dialog.open(SelectOptionDialogComponent, {
+          width:'auto'
         });
-      }
-     })
   }
 
 }

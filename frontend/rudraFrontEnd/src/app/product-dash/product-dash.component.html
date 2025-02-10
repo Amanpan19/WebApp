@@ -1,4 +1,5 @@
 
+<app-main-pro-dash></app-main-pro-dash>
 
 <div class="newArrivals">
   <button class="arrivals" [ngClass]="{ 'clicked': !isButtonClicked }" (click)="fetchProducts()">New Arrivals</button>
@@ -18,11 +19,19 @@
           <div class="cardDetails">
             <div class="imgCont">
                <img [src]="product.imageUrl" alt="pro" (click)="getProduct(product.productId)">
-               <div class="like"><a title="add to favourites" (click)="addInFavSection(product.productId)"><i class="fa-sharp fa-regular fa-heart"></i></a></div>
-               <div class="buy-icon"><a (click)="addToCart(product.productId)" title="Add to cart"><i class="far fa-shopping-bag"></i></a></div>
+                <div class="like">
+                  <a title="add to favourites" (click)="addInFavSection(product.productId)">
+                    <i class="fa-sharp fa-regular fa-heart"></i>
+                  </a>
+                </div>
+                <div class="buy-icon">
+                  <a (click)="navigateToSelect(product.productId)" title="Add to cart">
+                    <i class="far fa-shopping-bag"></i>
+                  </a>
+                </div>
             </div>
             <h2>{{ limitWords(product.productName) }}</h2>
-            <p class="proPrice">INR {{product.productPrice}} <span>onward</span></p>
+            <p class="proPrice" style="font-weight: 600;">INR {{product.productPrice}} <span>onward</span></p>
             <!-- <p *ngIf="product.productPrice>499" id="delivery">Free Delivery</p>-->
             <!-- <div class="ratings">
               <p id="rat">{{product.productRating}}<i class="fa fa-star"></i></p><span>2400 Reviews</span>
@@ -35,5 +44,14 @@
          <img src="../../assets/Pinwheel.gif" alt="" id="imgLoader">
       </div>
    </div>
+</div>
+
+<div class="socialHandles">
+  <div class="social">
+    <i class="fa-brands fa-facebook" style="color:rgb(0, 157, 255);"></i>
+    <i class="fa-brands fa-instagram" style="color:rgb(255, 0, 149);"></i>
+    <i class="fa-brands fa-whatsapp" style="color: rgb(3, 199, 0);"></i>
+    <i class="fa-brands fa-x-twitter" style="color: black;"></i>
+  </div>
 </div>
   
