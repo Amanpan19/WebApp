@@ -29,9 +29,10 @@ public class AuthFilter extends GenericFilterBean {
             httpServletResponse.getWriter().write("Token is missing or invalid");
             return;
         }
-        else {
-            String token = authHeader.substring(7);
 
+        String token = authHeader.substring(7);
+
+        try{
             // this will provide us claims(Data) send through token by decoding it using parser()
             Claims claims = Jwts.parser().setSigningKey("secKey1945").parseClaimsJws(token).getBody();
 
@@ -39,6 +40,10 @@ public class AuthFilter extends GenericFilterBean {
 
             httpServletRequest.setAttribute("attr1",claims.get("email"));
             httpServletRequest.setAttribute("attr2",claims.get("role"));
+        }catch (Exception e) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpServletResponse.getWriter().write("Token validation failed");
+            return;
         }
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }

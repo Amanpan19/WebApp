@@ -12,6 +12,8 @@ import com.userAuth.userAuth.model.User;
 import com.userAuth.userAuth.repository.AuthRepo;
 import com.userAuth.userAuth.repository.OtpForGotRepo;
 import com.userAuth.userAuth.request.CheckForgotPassRequest;
+import com.userAuth.userAuth.request.LoginRequest;
+import com.userAuth.userAuth.request.PasswordRequest;
 import com.userAuth.userAuth.response.CheckOtpPassForgotResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -21,10 +23,10 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -36,6 +38,9 @@ public class AuthService implements IAuthService{
 
     @Autowired
     private OtpForGotRepo otpRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private final DirectExchange directExchange;
     private final RabbitTemplate rabbitTemplate;
@@ -54,17 +59,29 @@ public class AuthService implements IAuthService{
             System.out.println("User Already Present");
             throw new UserAlreadyPresentException();
         }
-            return authRepo.save(user);
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+        return authRepo.save(user);
     }
 
     @Override
-    public User login(User user) throws UserNotFound {
-        if(authRepo.findByUserEmail(user.getUserEmail())==null){
-            System.out.println("User Not present");
-            throw new UserNotFound();
+    public User login(LoginRequest request){
+
+        User existingUser = authRepo.findByUserEmail(request.getEmail());
+
+        // Check if the user exists
+        if (existingUser == null) {
+            throw new AuthException(ErrorCodes.NOT_FOUND,
+                    Translator.toLocale("user.not.found",null));
         }
-        else
-           return authRepo.findByUserEmailAndPassword(user.getUserEmail(), user.getPassword());
+
+        // Verify the password
+        if (!passwordEncoder.matches(request.getPassword(), existingUser.getPassword())) {
+            throw new AuthException(ErrorCodes.CONFLICT,
+                    Translator.toLocale("pass.not.matched",null));
+        }
+
+        return existingUser;
     }
 
     @Override
@@ -99,6 +116,8 @@ public class AuthService implements IAuthService{
         System.out.println("User Removed Successfully..!");
     }
 
+
+    // Forgot Password
     @RabbitListener(queues = "ForgotPassQueue")
     @Transactional
     @Override
@@ -200,5 +219,22 @@ public class AuthService implements IAuthService{
             throw new AuthException(ErrorCodes.NOT_FOUND,
                     Translator.toLocale("pass.check.code.failed",null));
         }
+    }
+
+    @Transactional
+    @Override
+    public boolean changePassword(PasswordRequest request) {
+        if (StringUtils.isBlank(request.getEmail()) || StringUtils.isBlank(request.getNewPassword())) {
+            throw new AuthException(ErrorCodes.NO_CONTENT,
+                    Translator.toLocale("must.not.be.blank",null));
+        }
+
+        // Hash the new password before saving it to the database
+        String hashedPassword = passwordEncoder.encode(request.getNewPassword());
+
+        // Update the password
+        int updatePass = authRepo.updatePassword(request.getEmail(), hashedPassword);
+
+        return updatePass > 0;
     }
 }
