@@ -14,6 +14,7 @@ declare var bootstrap: any;
 export class MainFrontComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
+
     const carouselElement = document.querySelector('#carouselExampleIndicators');
     if (carouselElement) {
       new bootstrap.Carousel(carouselElement, {
