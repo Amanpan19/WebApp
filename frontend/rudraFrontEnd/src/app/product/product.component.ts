@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy,ChangeDetectorRef, Component, signal } from '@angular/core';
-import { cartRequest } from '../model/cartRequest';
 import { ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { UserService } from '../service/user.service';
@@ -8,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { FavouriteService } from '../service/favourite.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectOptionDialogComponent } from '../select-option-dialog/select-option-dialog.component';
 
 
 @Component({
@@ -32,6 +33,8 @@ export class ProductComponent {
   favExist:any;
   loading:boolean=false;
   productAdded:any;
+  selectedSize: string = '';
+  selectedColor: string = '';
   sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   constructor(private proSer:ProductService,
@@ -40,7 +43,8 @@ export class ProductComponent {
      private userSer:UserService,
      private cdr: ChangeDetectorRef,
      private favSer:FavouriteService,
-     private route:Router
+     private route:Router,
+     private dialog:MatDialog
     ){}
 
   ngOnInit(): void {
@@ -123,52 +127,61 @@ export class ProductComponent {
     
   }
 
-  addProductToCart() {
-    this.userSer.getUserData().subscribe({
-      next: (data) => {
-        this.userData = data;
+  navigateToSelect(prodId:number){
+    this.proSer.productId=prodId;
+      const dialogRef = this.dialog.open(SelectOptionDialogComponent, {
+        width:'auto'
+      });
+    }
+
+  // addProductToCart() {
+  //   this.userSer.getUserData().subscribe({
+  //     next: (data) => {
+  //       this.userData = data;
   
 
-        const request: cartRequest = {
-          productId: this.proId,
-          proQty: 1
-        };
+  //       const request: cartRequest = {
+  //         productId: this.proId,
+  //         proQty: 1,
+  //         productColor: this.selectedSize,
+  //         productSize: this.selectedColor
+  //       };
   
-        // Call the service to add the product to the cart
-        this.cartSer.addProductInCart(request).subscribe({
-          next: (data:any) => {
-            this.cartSer.getNoOfProductsInCart().subscribe({
-              next: (data: any) => {
-                const updatedCount = data.data; // API returns updated count
-                this.cartSer.notifyCartCountChange(updatedCount);
-              }
-            });
-            this._snackBar.open('Product added successfully.....', 'success', {
-              duration: 2000,
-              panelClass: ['mat-toolbar', 'mat-primary'],
-              horizontalPosition: 'left',
-              verticalPosition: 'top'
-            });
-            this.ngOnInit();
-          },
-          error: (err) => {
-            this._snackBar.open('Failed to add product', 'error', {
-              duration: 2000,
-              panelClass: ['mat-toolbar', 'mat-warn']
-            });
-            console.error('Error adding product to cart:', err);
-          }
-        });
-      },
-      error: (err) => {
-        this._snackBar.open('Failed to fetch user data', 'error', {
-          duration: 2000,
-          panelClass: ['mat-toolbar', 'mat-warn']
-        });
-        console.error('Error fetching user data:', err);
-      }
-    });
-  }
+  //       // Call the service to add the product to the cart
+  //       this.cartSer.addProductInCart(request).subscribe({
+  //         next: (data:any) => {
+  //           this.cartSer.getNoOfProductsInCart().subscribe({
+  //             next: (data: any) => {
+  //               const updatedCount = data.data; // API returns updated count
+  //               this.cartSer.notifyCartCountChange(updatedCount);
+  //             }
+  //           });
+  //           this._snackBar.open('Product added successfully.....', 'success', {
+  //             duration: 2000,
+  //             panelClass: ['mat-toolbar', 'mat-primary'],
+  //             horizontalPosition: 'left',
+  //             verticalPosition: 'top'
+  //           });
+  //           this.ngOnInit();
+  //         },
+  //         error: (err) => {
+  //           this._snackBar.open('Failed to add product', 'error', {
+  //             duration: 2000,
+  //             panelClass: ['mat-toolbar', 'mat-warn']
+  //           });
+  //           console.error('Error adding product to cart:', err);
+  //         }
+  //       });
+  //     },
+  //     error: (err) => {
+  //       this._snackBar.open('Failed to fetch user data', 'error', {
+  //         duration: 2000,
+  //         panelClass: ['mat-toolbar', 'mat-warn']
+  //       });
+  //       console.error('Error fetching user data:', err);
+  //     }
+  //   });
+  // }
 
   limitWords(productName: string): string {
     const words = productName.split(' ');
@@ -177,8 +190,6 @@ export class ProductComponent {
   
 
   updatePrice(size: string): void {
-    
-    console.log(size);
     
     if (!this.productData.data.productDetails.availableSize.includes(size)) {
       console.log(`Size ${size} is not available.`);
@@ -196,22 +207,24 @@ export class ProductComponent {
   
     switch (size) {
       case 'M':
-        priceMultiplier = 1.3;
+        priceMultiplier = 1;
         break;
       case 'L':
-        priceMultiplier = 1.5;
+        priceMultiplier = 1.02;
         break;
       case 'XL':
-        priceMultiplier = 1.7;
+        priceMultiplier = 1.1;
         break;
       case 'XXL':
-        priceMultiplier = 1.9;
+        priceMultiplier = 1.16;
+        break;
+      case 'XXXL':
+        priceMultiplier = 1.18;
         break;
     }
   
     // Calculate the updated price
     this.proPrice = Math.round(basePrice * priceMultiplier);
-    console.log(`Price updated to ${this.proPrice} for size ${size}`);
     
     // Update the previous size
     this.previousSize = size;

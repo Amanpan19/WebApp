@@ -13,7 +13,7 @@
         <div class="cardCont" *ngIf="!loading">
             <div class="cardImg">
                 <div class="favImg">
-                    <img [src]="productData.data.imageUrl" alt="">
+                    <img [src]="productData.data.imageUrl" alt="" id="prodImg">
                     <div class="fav">
                         <a (click)="toggleFavourite(productData.data.productId)">
                             <i class="fa-sharp fa-regular fa-heart" *ngIf="!productAdded"></i>
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="btn">
-                    <button (click)="addProductToCart()" class="btnSty" [disabled]=" productExistInCart.data === true">
+                    <button (click)="navigateToSelect(productData.data.productId)" class="btnSty" [disabled]=" productExistInCart.data === true">
                         <i class="fa-solid fa-cart-shopping"></i>
                         Add To Cart
                     </button>
@@ -99,7 +99,7 @@
     </div>
 </div>
 <div class="diversion">
-    <hr style="width: 90%;margin: auto; padding: 30px;">
+    <hr style="width: 90%;margin: auto; padding: 10px;">
 </div>
 
 
