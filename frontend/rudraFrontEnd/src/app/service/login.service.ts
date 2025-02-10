@@ -5,7 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService {
-  isLoggedIn:boolean=false;
+
+	isLoggedIn:boolean=false;
 
 	userLoggedIn = new EventEmitter<any>();
 
@@ -13,6 +14,7 @@ export class LoginService {
 
 	constructor(private httpClient: HttpClient) {
 	}
+
 
 	loginSuccess(){
 		this.isLoggedIn=true;
@@ -28,7 +30,10 @@ export class LoginService {
 	}
 
 	login(loginData: any) {
-    // console.log(loginData);
 		return this.httpClient.post(`${this.authUrl}/user/login`, loginData);
+	}
+
+	generateOtpForgotPass(email:string){
+		return this.httpClient.get(`${this.authUrl}/user/email/verify?email=${email}`);
 	}
 }
