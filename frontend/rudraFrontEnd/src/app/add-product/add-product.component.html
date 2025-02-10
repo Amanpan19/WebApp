@@ -215,6 +215,25 @@
 
           </div>
 
+          <div class="form-row">
+            <label for="">Tags</label>
+            <div class="chips-container">
+              <div class="chip" *ngFor="let chip of proTags.controls; let i = index">
+                {{ chip.value }}
+                <span class="close" (click)="removeChip(i)">×</span>
+              </div>
+              
+              <div class="cont">
+                <div class="textCont">
+                  <input type="text" placeholder="Add a chip..." #chipInput/>
+                </div>
+                <i (click)="addChip(chipInput.value, chipInput)" class="fa-sharp fa-solid fa-plus"
+                  style="padding: 10px 20px; border: 2px solid rgb(215, 215, 215); cursor: pointer; margin-top: -15px;"
+                  id="addChip"></i>
+              </div> 
+            
+            </div>
+          </div>
         
           <div class="form-row">
 
@@ -259,6 +278,9 @@
                 <option *ngIf="productForm.get('category')?.value === 'mens'" value="dhotis">Dhotis</option>
                 <option *ngIf="productForm.get('category')?.value === 'womens'" value="sarees">Sarees</option>
                 <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="sweatshirt">Sweat-Shirt</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="T-shirt">T-shirt</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="shirt">Shirt</option>
+                <option *ngIf="['mens', 'womens', 'kids'].includes(productForm.get('category')?.value)" value="puffer jacket">Puffer Jacket</option>
               </select>
 
               <div id="err" *ngIf="productForm.get('fashionType')?.errors?.['required'] && productForm.get('fashionType')?.dirty">
@@ -268,16 +290,7 @@
 
           </div>
 
-            <!-- <div>
-              <label>Available Sizes:</label>
-              <div>
-                <label><input type="checkbox" formControlName="availableSize" value="S" /> S</label>
-                <label><input type="checkbox" formControlName="availableSize" value="M" /> M</label>
-                <label><input type="checkbox" formControlName="availableSize" value="XL" /> XL</label>
-                <label><input type="checkbox" formControlName="availableSize" value="XXL" /> XXL</label>
-                <label><input type="checkbox" formControlName="availableSize" value="XXXL" /> XXXL</label>
-              </div>
-            </div> -->
+          
           </div>
       
           

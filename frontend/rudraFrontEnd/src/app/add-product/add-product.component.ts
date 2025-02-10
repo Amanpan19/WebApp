@@ -21,14 +21,14 @@ export class AddProductComponent implements OnInit{
   productInfo!:productInfo;
   selectedImage: any = File;
   clothTypes = ['Cotton', 'Linen', 'Silk', 'Polyester'];
+  chips: string[] = [];
+  chipInput: string = '';
 
   constructor(
         private fb:FormBuilder,
         private productService:ProductService,
         private _snackBar:MatSnackBar,
-        private userSer:UserService,
-        private el: ElementRef,
-        private renderer: Renderer2
+        private userSer:UserService
         ){}
 
   ngOnInit(): void {
@@ -51,6 +51,7 @@ export class AddProductComponent implements OnInit{
         return14DayAvailability: [false, Validators.required],
         colorsAvail: this.fb.array([], Validators.required),
         fashionType: ['', Validators.required],
+        proTags: this.fb.array([],Validators.required)
       })
     })
   }
@@ -96,6 +97,21 @@ export class AddProductComponent implements OnInit{
     if (input.files && input.files.length > 0) {
       this.selectedImage = input.files[0];
     }
+  }
+
+  get proTags(): FormArray {
+    return this.productForm.get('productDetails.proTags') as FormArray;
+  }
+
+  addChip(val:string,inputElement: HTMLInputElement){
+    if(val.trim())
+      this.proTags.push(this.fb.control(val, Validators.required));
+
+    inputElement.value='';
+  }
+
+  removeChip(index: number){
+    this.proTags.removeAt(index);
   }
 
   onSubmit(){

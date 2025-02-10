@@ -145,6 +145,49 @@ button:hover {
     margin-top: -8px;
 }
 
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.chip {
+  background-color: #ff004c;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.close {
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cont{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.textCont{
+  width: 90%;
+}
+
+/* #addChip{
+  position: absolute;
+  right: 12px;top:31px;
+} */
+
 @media (max-width:570px) {
   .form-row{
     display: block;
