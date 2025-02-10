@@ -22,4 +22,6 @@ public class BuyProduct extends BaseEntity {
     private int productId;
     private String userId;
     private boolean orderPlaced;
+    private String productColor;
+    private double productPrice;
 }

@@ -25,4 +25,7 @@ public class Cart extends BaseEntity {
     private Integer productId;
     private LocalDateTime addedOn;
     private int proQty;
+    private String productColor;
+    private String productSize;
+    private double productPrice;
 }
