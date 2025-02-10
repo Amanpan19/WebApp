@@ -24,7 +24,9 @@
         <li *ngIf="!role"><a [routerLink]="'/adminDash'">Admin Dash</a></li>
         <li *ngIf="supplierValid"><a [routerLink]="'/supplierDash'">Supplier</a></li>
         <li class="profile">
-            <a (click)="navigateUser()" style="cursor:pointer;"><i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i></a>
+            <a (click)="navigateUser()" style="cursor:pointer;">
+                <i class="fa-thin fa-user-vneck" style="font-weight: 300;"></i>
+            </a>
             <!-- <ul class="proList">
                 <li>Hello {{userName}}</li>
                 <li id="log"><a (click)="login()">{{loginTime}}</a></li>
@@ -69,7 +71,10 @@
 <!-- Bottom Navigation for Mobile View -->
 <div class="bottom-nav" *ngIf="isMobile">
 
-    <a (click)="navigateUser()"><i class="fa-light fa-user"></i></a>
+    <a *ngIf="role" [routerLink]="'/suppVerification'"><i class="fa-light fa-handshake"></i></a>
+
+    <a [routerLink]="'/adminDash'" *ngIf="!role"><i class="fa-sharp fa-light fa-gear"></i></a>
+    
 
     <a routerLink="/fav">
         <div matBadge="{{noOfProductsInFav}}" matBadgeOverlap="false" class="custom-badge">
@@ -85,5 +90,5 @@
         </div>
     </a>    
 
-    <a *ngIf="isMobile" [routerLink]="'/suppVerification'"><i class="fa-light fa-handshake"></i></a>
+    <a (click)="navigateUser()"><i class="fa-light fa-user"></i></a>
 </div>
