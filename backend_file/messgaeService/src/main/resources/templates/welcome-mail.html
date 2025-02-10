@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rivanaa Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .email-header {
+            background: rgb(239, 19, 89);
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .email-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .email-body {
+            padding: 20px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .email-body p {
+            margin: 0 0 15px;
+        }
+        .email-footer {
+            background: #f4f4f4;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            color: #777777;
+        }
+        .email-footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+        .btn {
+            display: inline-block;
+            background: rgb(37, 37, 38);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .divider {
+            border-top: 1px solid #dddddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <!-- Header Section -->
+    <div class="email-header">
+        <h1>$subject</h1>
+    </div>
+
+    <!-- Body Section -->
+    <div class="email-body">
+        <p>Dear <strong>[name],</strong></p>
+        <p>
+            Thank you for connecting with <strong>Rivanaa</strong>. We are thrilled to have you onboard and are committed to providing you with the best experience possible.
+        </p>
+        <p>
+            Whether you’re here to explore our services, shop for premium products, or stay updated with our latest offerings, we’ve got you covered.
+        </p>
+        <a href="[CTA Link]" class="btn">Get Started</a>
+        <div class="image" style="width:100%; display: flex; justify-content: center; align-items: center; height: 50vh;">
+            <img src="https://img.freepik.com/free-vector/colorful-welcome-lettering-banner-invite-your-guest-event_1017-50043.jpg" alt="Welcome Banner" style="max-width: 100%; height: auto;" />
+        </div>
+
+        <div class="divider"></div>
+        <p>
+            If you have any questions or need assistance, feel free to reach out to us. We’re always here to help.
+        </p>
+        <p>Warm regards,</p>
+        <p><strong>The Rivanaa Team</strong></p>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="email-footer">
+        <p>&copy; {{currentYear}} Rivanaa. All rights reserved.</p>
+        <p>
+            <a href="[Privacy Policy URL]">Privacy Policy</a> |
+            <a href="[Contact Us URL]">Contact Us</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
