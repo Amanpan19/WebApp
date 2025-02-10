@@ -5,6 +5,8 @@ import com.messageService.messgaeService.domain.EmailBuilder;
 import com.messageService.messgaeService.domain.EmailMessage;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,10 +18,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Random;
 
+@Slf4j
 @Service
 public class EmailMessageService implements IEmailMessageService {
 
     private JavaMailSender javaMailSender;
+    private final String fromEmail = "cloudcartecommerce@gmail.com";
 
     @Autowired
     public EmailMessageService(JavaMailSender javaMailSender){
@@ -28,6 +32,9 @@ public class EmailMessageService implements IEmailMessageService {
 
     @Value("${otp.forgot.password.template}")
     private String otpForgotPassword;
+
+    @Value("${welcome.mail.template}")
+    private String welcomeMail;
 
     public void sendMail(EmailMessage message, boolean isHtml) throws MessagingException {
 
@@ -46,24 +53,25 @@ public class EmailMessageService implements IEmailMessageService {
     @RabbitListener(queues = "EmailQueue")
     @Override
     public void sendEmail(EcommDTO ecommDTO) {
-        EmailMessage emailMessage = new EmailMessage();
+        try {
 
-        String to = ecommDTO.getJsonObject().get("to").toString();
-        String subject = ecommDTO.getJsonObject().get("subject").toString();
-        String message = ecommDTO.getJsonObject().get("message").toString();
+            String to = ecommDTO.getJsonObject().get("to").toString();
+            String subject = ecommDTO.getJsonObject().get("subject").toString();
+            String name = ecommDTO.getJsonObject().get("name").toString();
 
-        emailMessage.setTo(to);
-        emailMessage.setSubject(subject);
-        emailMessage.setMessage(message);
 
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("cloudcartecommerce@gmail.com");
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(message);
-        javaMailSender.send(simpleMailMessage);
-        System.out.println("Success");
-        System.out.println("Success welcome sendEmail");
+            EmailMessage emailMessage = new EmailBuilder()
+                    .from(fromEmail).to(to).template(welcomeMail)
+                    .addContext("subject",subject)
+                    .addContext("name",name)
+                    .addContext("currentYear",String.valueOf(LocalDate.now().getYear()))
+                    .addContext("email",to)
+                    .createMail();
+            sendMail(emailMessage,true);
+
+        }catch (Exception ex){
+            log.error(ExceptionUtils.getStackTrace(ex));
+        }
     }
 
     @Override
@@ -77,7 +85,7 @@ public class EmailMessageService implements IEmailMessageService {
         System.out.println("Success welcome user");
     }
 
-    @RabbitListener(queues = "EmailQueue")
+//    @RabbitListener(queues = "EmailQueue")
     @Override
     public void reqApproved(EcommDTO ecommDTO) {
         EmailMessage emailMessage = new EmailMessage();
@@ -132,7 +140,7 @@ public class EmailMessageService implements IEmailMessageService {
             String name = ecommDTO.getJsonObject().get("name").toString();
 
             EmailMessage emailMessage = new EmailBuilder()
-                    .from("cloudcartecommerce@gmail.com").to(to).template(otpForgotPassword)
+                    .from(fromEmail).to(to).template(otpForgotPassword)
                     .addContext("email", to)
                     .addContext("otp", otp)
                     .addContext("name", name)
@@ -141,7 +149,7 @@ public class EmailMessageService implements IEmailMessageService {
                     .createMail();
             sendMail(emailMessage, true);
         }catch (Exception ex){
-
+            throw new RuntimeException();
         }
     }
 }
