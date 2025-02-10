@@ -5,7 +5,6 @@ import { NavBarComponent } from "./nav-bar/nav-bar.component";
 import { FooterComponent } from './footer/footer.component';
 import { MainFrontComponent } from "./main-front/main-front.component";
 import { LoginComponent } from "./login/login.component";
-import {HttpClientModule} from "@angular/common/http";
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from "./add-product/add-product.component";
@@ -17,6 +16,8 @@ import { CartInfoComponent } from './cart-info/cart-info.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SearchComponent } from './search/search.component';
 import { LoaderComponent } from './loader/loader.component';
+import { SelectOptionDialogComponent } from './select-option-dialog/select-option-dialog.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -43,7 +44,9 @@ import { LoaderComponent } from './loader/loader.component';
         MatBadgeModule,
         CartInfoComponent,RouterModule,
         MatExpansionModule,
-        SearchComponent
+        SearchComponent,
+        SelectOptionDialogComponent,
+        ForgotPasswordComponent
     ]
 })
 export class AppComponent implements OnInit {
