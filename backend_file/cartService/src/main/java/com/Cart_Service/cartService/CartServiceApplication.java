@@ -23,6 +23,7 @@ public class CartServiceApplication {
 				"/v1/api/cart/addProduct",
 				"/v1/api/cart/getCart/details/*",
 				"/v1/api/cart/getNoOfProducts",
+				"/v1/api/cart/increase/product",
 				"/v1/api/cart/remove/product",
 				"/v1/api/cart/decrease/productQty",
 				"/v1/api/cart/check-exist",

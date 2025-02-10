@@ -14,6 +14,6 @@ import java.util.Map;
 public class CartDetailsResponse {
 
     private String userId;
-    private Map<Integer, Integer> productDetails;
+    private Map<Integer, Map<String, Object>> productDetails;
     private int noOfProducts;
 }

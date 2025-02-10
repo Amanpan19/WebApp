@@ -1,6 +1,7 @@
 package com.Cart_Service.cartService.Service;
 
 import com.Cart_Service.cartService.Request.CartRequest;
+import com.Cart_Service.cartService.Request.ProductQtyIncreaseRequest;
 import com.Cart_Service.cartService.Request.ProductQtyReduceRequest;
 import com.Cart_Service.cartService.Request.ProductRemoveRequest;
 import com.Cart_Service.cartService.Response.CartDetailsResponse;
@@ -23,6 +24,14 @@ public interface CartService {
      * @return
      * */
     public boolean reduceProductQtyFromCart(ProductQtyReduceRequest request, String email);
+
+    /**
+     * This method is going to increase the qty from the cart for a particular product
+     *
+     * @param email, request
+     * @return
+     * */
+    public boolean increaseProductQtyFromCart(ProductQtyIncreaseRequest request, String email);
 
     /**
      * Removes the product from the cart by changing the active-delete status

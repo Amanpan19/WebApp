@@ -10,4 +10,7 @@ import lombok.NoArgsConstructor;
 public class CartRequest {
     private Integer productId;
     private Integer proQty;
+    private String productColor;
+    private String productSize;
+    private double productPrice;
 }
